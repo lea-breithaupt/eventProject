@@ -20,7 +20,7 @@ const CreateUserEvent = ({ addToEventList }) => {
     const createNewEvent = async (e) => {
         e.preventDefault()
 
-        const response = await axios.post(`/addUserEvent/${userId}`, {
+        const response = await axios.post(`/addUserEvent`, {
             eventName,
             venueName,
             eventDate,

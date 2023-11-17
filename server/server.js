@@ -33,7 +33,7 @@ app.get('/getUsersFirstName', authFunctions.getUsersFirstName)
 app.post('/register', userFunctions.register)
 
 // Event routes:
-app.post('/addUserEvent/:userId', eventFunctions.addUserEvent)
+app.post('/addUserEvent', eventFunctions.addUserEvent)
 app.get('/getEventDetails/:userId', eventFunctions.getEventDetails)
 app.get('/allUserEvents',eventFunctions.allUserEvents)
 // app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser);

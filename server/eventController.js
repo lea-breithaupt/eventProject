@@ -2,41 +2,43 @@ import { User, Event, Category, Favorite} from '../db/model.js'
 
 const eventFunctions = {
     addUserEvent: async (req, res) => {
-        const { userId } = req.params
+        if(req.session.userId) {
+          const { 
+              eventName, 
+              venueName, 
+              eventDate, 
+              duration, 
+              streetNumber, 
+              city, 
+              state, 
+              zipcode, 
+              description, 
+              familyFriendly, 
+              dogFriendly
+          } = req.body
 
-        const { 
-            eventName, 
-            venueName, 
-            eventDate, 
-            duration, 
-            streetNumber, 
-            city, 
-            state, 
-            zipcode, 
-            description, 
-            familyFriendly, 
-            dogFriendly
-        } = req.body
+          const newUserEvent = await Event.create({
+              eventName,
+              venueName,
+              eventDate,
+              duration,
+              streetNumber,
+              city,
+              state,
+              zipcode,
+              description,
+              familyFriendly,
+              dogFriendly,
+              userId: req.session.userId
+          })
 
-        const newUserEvent = await Event.create({
-            eventName,
-            venueName,
-            eventDate,
-            duration,
-            streetNumber,
-            city,
-            state,
-            zipcode,
-            description,
-            familyFriendly,
-            dogFriendly,
-            userId: userId
-        })
-
-        res.status(201).json({
-            message: 'New event created',
-            event: newUserEvent
-        })
+          res.status(201).json({
+              message: 'New event created',
+              event: newUserEvent
+          })
+        } else {
+          res.status(403).send('not authorized')
+        }
     },
 
     getEventDetails: async (req, res) => {

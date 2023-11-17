@@ -11,23 +11,14 @@ import CreateUserEventBtn from '../components/CreateUserEventBtn'
 const HomePage = () => {
   const dispatch = useDispatch()
   const loggedIn = useSelector((state) => state.isLoggedIn)
-  const userId = useSelector((state) => state.user.userId);
+  const userId = useSelector((state) => state.userId);
 
   const [eventList, setEventList] = useState([])
   const [firstname, setFirstName] = useState('')
 
-  const handleAddEvent = async (newEvent) => {
-    const response = await axios.post(`/addUserEvent/${userId}`, newEvent)
-      .then(res => {
-        dispatch({
-          type: 'authenticated',
-          payload: res.data.userId
-        })
-      })
-    const savedEvent = response.data.event;
+  const addToEventList = (savedEvent) => {
     setEventList([...eventList, savedEvent])
   }
-
   useEffect(() => {
     const getUsersFirstName = async () => {
       const response = await axios.get('/getUsersFirstName')
@@ -45,7 +36,7 @@ const HomePage = () => {
           <h2>Welcome, {firstname}</h2>
           <div>
             <CreateUserEventBtn />
-            <CreateUserEvent onSuccess={handleAddEvent}/>
+            <CreateUserEvent addToEventList={addToEventList}/>
           </div>
 
           <div>

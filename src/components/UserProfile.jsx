@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Calendar } from '@fullcalendar/core';
 
 const UserProfile = () => {
     const [firstName, setFirstName] = useState('');
@@ -17,7 +18,25 @@ const UserProfile = () => {
 
     return (
         <div>
-            <h2>{firstName}</h2>
+            <div>
+                <h2>{firstName}</h2>
+            </div>
+            <div>
+                <h4>Personal Information:</h4>
+            </div>
+            <div>
+                <h4>Created Events:</h4>
+            </div>
+            <div>
+                <h4>Upcoming Events:</h4>
+            </div>
+            <div>
+                <h4>Favorite Events:</h4>
+            </div>
+            <div>
+                <h4>My Calendar:</h4>
+                <Calendar />
+            </div>
         </div>
     );
 };

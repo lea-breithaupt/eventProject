@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 
-const CreateUserEvent = ({ onSuccess }) => {
+const CreateUserEvent = ({ addToEventList }) => {
+    const userId = useSelector((state) => state.userId)
 
     const [eventName, setEventName] = useState('')
     const [venueName, setVenueName] = useState('')
@@ -18,7 +20,7 @@ const CreateUserEvent = ({ onSuccess }) => {
     const createNewEvent = async (e) => {
         e.preventDefault()
 
-        const response = await axios.post('/addUserEvent', {
+        const response = await axios.post(`/addUserEvent/${userId}`, {
             eventName,
             venueName,
             eventDate,
@@ -31,8 +33,8 @@ const CreateUserEvent = ({ onSuccess }) => {
             familyFriendly,
             dogFriendly
         })
-        const newEvent = response.data.event
-        onSuccess(newEvent)
+        const savedEvent = response.data.event
+        addToEventList(savedEvent)
     }
 
   return (

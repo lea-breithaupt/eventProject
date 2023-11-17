@@ -19,7 +19,7 @@ const CreateUserEventBtn = ({ onEventCreate }) => {
       <button onClick={handleCreateEvent}>Create New Event</button>
       {showForm && (
         <CreateUserEvent
-          onSuccess={handleEventCreated} // Call handleEventCreated when an event is successfully created
+          addToEventList={handleEventCreated} // Call handleEventCreated when an event is successfully created
           onClose={() => setShowForm(false)}
         />
       )}

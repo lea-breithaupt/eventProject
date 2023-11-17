@@ -6,7 +6,6 @@ import UserCreatedEvents from '../components/UserCreatedEvents'
 import UserUpcomingEvents from '../components/UserUpcomingEvents'
 import UserFavoritedEvents from '../components/UserFavoritedEvents'
 import UserSuggestedEvents from '../components/UserSuggestedEvents'
-import CreateUserEventBtn from '../components/CreateUserEventBtn'
 
 const HomePage = () => {
   const dispatch = useDispatch()
@@ -15,9 +14,19 @@ const HomePage = () => {
 
   const [eventList, setEventList] = useState([])
   const [firstname, setFirstName] = useState('')
+  const [displayEventCreationForm, setDisplayEventCreationForm] = useState(false)
 
   const addToEventList = (savedEvent) => {
     setEventList([...eventList, savedEvent])
+  }
+
+  const toggleEventCreationForm = () => {
+    console.log(displayEventCreationForm)
+    if(displayEventCreationForm === true) {
+      setDisplayEventCreationForm(false)
+    } else {
+      setDisplayEventCreationForm(true)
+    }
   }
   useEffect(() => {
     const getUsersFirstName = async () => {
@@ -35,8 +44,10 @@ const HomePage = () => {
         <div>
           <h2>Welcome, {firstname}</h2>
           <div>
-            <CreateUserEventBtn />
-            <CreateUserEvent addToEventList={addToEventList}/>
+            <button onClick={toggleEventCreationForm}>
+              {displayEventCreationForm ? 'Close Event Form' : 'Create New Event'}
+            </button>
+            {displayEventCreationForm && <CreateUserEvent addToEventList={addToEventList}/>}
           </div>
 
           <div>

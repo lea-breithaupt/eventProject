@@ -5,7 +5,8 @@ import CreateUserEvent from '../components/CreateUserEvent'
 import UserCreatedEvents from '../components/UserCreatedEvents'
 import UserUpcomingEvents from '../components/UserUpcomingEvents'
 import UserFavoritedEvents from '../components/UserFavoritedEvents'
-import UserSuggestedEvents from '../components/UserSuggestedEvents'
+import UserSuggestedEvents from '../components/EventBriteEvents'
+import EventsByZipcode from '../components/EventsByZipcode'
 
 const HomePage = () => {
   const dispatch = useDispatch()
@@ -28,6 +29,7 @@ const HomePage = () => {
       setDisplayEventCreationForm(true)
     }
   }
+
   useEffect(() => {
     const getUsersFirstName = async () => {
       const response = await axios.get('/getUsersFirstName')
@@ -60,17 +62,20 @@ const HomePage = () => {
 
           <div>
             <h2>{firstname}'s Upcoming Events</h2>
-            <UserUpcomingEvents />
+            <UserUpcomingEvents 
+            />
           </div>
 
           <div>
             <h2>{firstname}'s Favorite Events</h2>
-            <UserFavoritedEvents />
+            <UserFavoritedEvents 
+            />
           </div>
 
           <div>
-            <h2>Suggested Events for {firstname}</h2>
-            <UserSuggestedEvents />
+            <h2>Events happening around your city:</h2>
+            {/* <EventsByZipcode 
+            /> */}
           </div>
           
         </div>

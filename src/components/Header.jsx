@@ -43,7 +43,7 @@ const Header = () => {
               Home
             </button>
           </NavLink>
-          <NavLink to='/user-profile/:userId'>
+          <NavLink to={`/user-profile/${userId}`}>
             <button>
               Profile
             </button>

@@ -3,7 +3,8 @@ const initialState = {
     isLoggedIn: false,
     eventCreated: false,
     createdEventDetails: null,
-    loggedInUser: null
+    loggedInUser: null,
+    editMode: false
 }
 
 const reducer = (state = initialState, action) => {
@@ -36,11 +37,11 @@ const reducer = (state = initialState, action) => {
                 isLoggedIn: true,
             }
         
-        case 'SET_EDIT_MODE': 
+        case 'EDIT_MODE': 
             return {
                 ...state,
                 isLoggedIn: true,
-                editMode: action.payload
+                editMode: !state.editMode
             }
         
         case 'LOG IN':

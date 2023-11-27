@@ -9,7 +9,7 @@ const CreateUserEvent = ({ addToEventList }) => {
     const [venueName, setVenueName] = useState('')
     const [eventDate, setEventDate] = useState('')
     const [duration, setDuration] = useState('')
-    const [address, setAddress] = useState('')
+    const [streetNumber, setStreetNumber] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
@@ -25,7 +25,7 @@ const CreateUserEvent = ({ addToEventList }) => {
             venueName,
             eventDate,
             duration,
-            address,
+            streetNumber,
             city,
             state,
             zipcode,
@@ -72,12 +72,12 @@ const CreateUserEvent = ({ addToEventList }) => {
                     onChange={(e) => setDuration(e.target.value)}
                     required={true}
                 />
-            <label>Address:</label>
+            <label>Street Number:</label>
                 <input 
-                    placeholder='Address'
+                    placeholder='Street Number'
                     type='text'
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
+                    value={streetNumber}
+                    onChange={(e) => setStreetNumber(e.target.value)}
                     required={true}
                 />
             <label>City:</label>

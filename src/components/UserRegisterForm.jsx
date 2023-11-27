@@ -42,16 +42,6 @@ const UserRegisterForm = () => {
                 })
 
                 setShowForm(false)
-
-                // .catch(err => {
-                //     if(err.response && err.response.status === 400){
-                //         setRegistrationError('User already exists. Please choose another username')
-                //     } else {
-                //         console.log('Registration failed', err)
-                //         setRegistrationError('Registration failed. Please try again.')
-                //     }
-                    
-                // })
             })
     }
   return (

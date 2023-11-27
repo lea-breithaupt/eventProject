@@ -29,3 +29,11 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
 
 export default UserCreatedEvents;
 
+
+// useEffect(() => {
+//   const getAllUserEvents = async () => {
+//     const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
+//     setEventList(response.data)
+//   }
+//   getAllUserEvents()
+// }, [userId])

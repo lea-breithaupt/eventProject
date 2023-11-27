@@ -31,14 +31,18 @@ app.get('/getUsersFirstName', authFunctions.getUsersFirstName)
 
 // User routes:
 app.post('/register', userFunctions.register)
+app.get('/userProfile/:userId', userFunctions.userProfile)
+app.put('/updateUserProfile/:userId', userFunctions.updateUserProfile)
+app.delete('/deleteUserProfile', userFunctions.deleteUserProfile)
 
 // Event routes:
 app.post('/addUserEvent', eventFunctions.addUserEvent)
 app.get('/getEventDetails/:userId', eventFunctions.getEventDetails)
-app.get('/allUserEvents',eventFunctions.allUserEvents)
-// app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser);
-// app.get('/getEventsByZipcode', eventFunctions.getEventsByZipcode)
+app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser)
 app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
-app.put('/editEvent/:eventId', eventFunctions.editEvent)
+// app.put('/editEvent/:eventId', eventFunctions.editEvent)
+app.get('/getEventsByUserZipcode', eventFunctions.getEventsByUserZipcode)
+// app.post('/favoriteEvent/:eventId', eventFunctions.favoriteEvent)
+// app.get('/userFavoriteEvents', eventFunctions.userFavoriteEvents)
 
 ViteExpress.listen(app, 5050, () => console.log(`http://localhost:5050`))

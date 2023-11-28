@@ -9,15 +9,12 @@ import UserSuggestedEvents from '../components/EventBriteEvents'
 import EventsByZipcode from '../components/EventsByZipcode'
 
 const HomePage = () => {
-  const dispatch = useDispatch()
   const loggedIn = useSelector((state) => state.isLoggedIn)
-  const userId = useSelector((state) => state.userId);
 
   const [eventList, setEventList] = useState([])
   const [firstname, setFirstName] = useState('')
   const [displayEventCreationForm, setDisplayEventCreationForm] = useState(false)
-  const [showEventSuccessMessage, setShowEventSuccessMessage] = useState(false);
-
+  const [showEventSuccessMessage, setShowEventSuccessMessage] = useState(false)
 
   const addToEventList = (savedEvent) => {
     setEventList([...eventList, savedEvent])
@@ -29,23 +26,23 @@ const HomePage = () => {
 
   const toggleEventCreationForm = () => {
     console.log(displayEventCreationForm)
-    setDisplayEventCreationForm((prev) => !prev);
-    setShowEventSuccessMessage(false);
+    setDisplayEventCreationForm((prev) => !prev)
+    setShowEventSuccessMessage(false)
   }
 
   const cancelEventCreation = () => {
-    setDisplayEventCreationForm(false);
-    setShowEventSuccessMessage(false);
+    setDisplayEventCreationForm(false)
+    setShowEventSuccessMessage(false)
   }
   
   const closeEventCreationForm = () => {
-    setDisplayEventCreationForm(false);
+    setDisplayEventCreationForm(false)
   }
 
   useEffect(() => {
     const getUsersFirstName = async () => {
       const response = await axios.get('/getUsersFirstName')
-      const userFirstName = response.data.firstName;
+      const userFirstName = response.data.firstName
       setFirstName(userFirstName)
   }
 

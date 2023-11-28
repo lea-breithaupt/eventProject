@@ -38,14 +38,14 @@ const authFunctions = {
 
     getUsersFirstName: async (req, res) => {
         const userId = req.session.userId
-        if (userId) {
+        if(userId) {
          const user = await User.findOne({
             where: {
                 userId: userId
             }
         })
 
-        if (user) {
+        if(user) {
          const usersFirstName = {
             firstName: user.firstName
          }

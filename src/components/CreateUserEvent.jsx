@@ -1,10 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useState } from 'react'
 import axios from 'axios'
 
 const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
-    const userId = useSelector((state) => state.userId)
-
     const [eventName, setEventName] = useState('')
     const [venueName, setVenueName] = useState('')
     const [eventDate, setEventDate] = useState('')
@@ -48,7 +45,7 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
         setFamilyFriendly('')
         setDogFriendly('')
 
-      closeEventCreationForm();
+      closeEventCreationForm()
     }
     
   return (

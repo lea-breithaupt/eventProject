@@ -16,10 +16,7 @@ function App() {
         <Route path='/' element={<HomePage />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/create-user-account' element={<CreateUserAccountPage />} />
-        <Route 
-          path='/user-profile/:userId' 
-          element={<UserProfilePage />} 
-          />
+        <Route path='/user-profile/:userId' element={<UserProfilePage />} />
       </Routes>
     </BrowserRouter>
   )

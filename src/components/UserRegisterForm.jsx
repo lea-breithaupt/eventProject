@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
 
 const UserRegisterForm = () => {
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
@@ -17,8 +15,6 @@ const UserRegisterForm = () => {
 
     const [showForm, setShowForm] = useState(true)
     const [showPassword, setShowPassword] = useState(false)
-
-    const interestOptions = ['Music', 'Football','Baseball','Theatre','Food','Festivals','']
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword)
@@ -106,7 +102,6 @@ const UserRegisterForm = () => {
                         onChange={(e) => setZipcode(e.target.value)}
                         required={true}
                     />
-                <h4>Select up 5 types of events you are intersted in:</h4>
                 <button type='submit'>Create Account</button>
             </form>
         )}

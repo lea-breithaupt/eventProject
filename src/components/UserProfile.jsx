@@ -9,9 +9,14 @@ const UserProfile = () => {
 
     const [user, setUser] = useState(null)
     const [editUser, setEditUser] = useState(null)
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleDelete = async () => {
         await axios.delete('/deleteUserProfile')
+    }
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword)
     }
 
     useEffect(() => {
@@ -26,7 +31,8 @@ const UserProfile = () => {
 
     const handleEdit = () => {
         dispatch({
-            type: 'EDIT_MODE'
+            type: 'EDIT_MODE',
+            payload: !editMode,
         })
     }
 
@@ -52,8 +58,77 @@ const UserProfile = () => {
                 <h4>Personal Information:</h4>
                 {editUser && (
                     <div>
-                        <p>First Name: {editMode ? <input name="firstName" value={editUser.firstName} onChange={handleInputChange} /> : editUser.firstName}</p>
-                        <p>Last Name: {editMode ? <input name="lastName" value={editUser.lastName} onChange={handleInputChange} /> : editUser.lastName}</p>
+                        <p>First Name: 
+                            {editMode ? 
+                                <input 
+                                    name="firstName" 
+                                    value={editUser.firstName} 
+                                    onChange={handleInputChange} /> 
+                            : editUser.firstName}
+                        </p>
+                        <p>Last Name: 
+                            {editMode ? 
+                                <input 
+                                    name="lastName" 
+                                    value={editUser.lastName} 
+                                    onChange={handleInputChange} 
+                                /> 
+                            : editUser.lastName}
+                        </p>
+                        <p>Username: 
+                            {editMode ? 
+                                <input 
+                                    name="username" 
+                                    value={editUser.username} 
+                                    onChange={handleInputChange} 
+                                /> 
+                            : editUser.username}
+                        </p>
+                        <p>Email: 
+                            {editMode ? 
+                                <input 
+                                    name="email" 
+                                    value={editUser.email} 
+                                    onChange={handleInputChange} 
+                                /> 
+                            : editUser.email}
+                        </p>
+                        <p>
+                        {editMode ? (
+                            <div>
+                                 <p>Password:
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        value={editUser.password}
+                                        onChange={handleInputChange}
+                                        name="password"
+                                    />
+                                </p>
+                                <label>
+                                    Show Password:
+                                    <input
+                                         type="checkbox"
+                                         checked={showPassword}
+                                         onChange={togglePasswordVisibility}
+                                    />
+                                </label>
+                        </div>
+                        ) : (
+                            <p>
+                                Password: {' '}
+                                {showPassword ? editUser.password : '•'.repeat(editUser.password.length)}
+                            </p>
+                        )}
+                        </p>
+                        <p>Zipcode: 
+                            {editMode ? 
+                                <input 
+                                    name="zipcode" 
+                                    value={editUser.zipcode} 
+                                    onChange={handleInputChange} 
+                                /> 
+                            : editUser.zipcode}
+                        </p>
                         <button onClick={handleEdit}>{editMode ? 'Cancel' : 'Edit'}</button>
                         {editMode && <button onClick={handleSave}>Save</button>}
                         <button onClick={handleDelete}>Delete Account</button>
@@ -77,11 +152,3 @@ export default UserProfile
 
 {/* <p>Password: {showPassword ? user.password : '•'.repeat(user.password.length)}</p>
                 <button onClick={togglePasswordVisibility}>Toggle Password Visibility</button> */}
-                {/* <button onClick={handleEdit}>Edit</button>
-                {isEditing && <button onClick={handleSave}>Save</button>} */}
-
-                // const [showPassword, setShowPassword] = useState(false)
-
-    // const togglePasswordVisibility = () => {
-    //     setShowPassword(!showPassword);
-    // }

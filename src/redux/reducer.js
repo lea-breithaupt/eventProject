@@ -41,7 +41,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoggedIn: true,
-                editMode: !state.editMode
+                editMode: action.payload
             }
         
         case 'LOG IN':

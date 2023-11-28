@@ -39,22 +39,6 @@ const eventFunctions = {
         } else {
           res.status(403).send('not authorized')
         }
-    },
-
-    getEventDetails: async (req, res) => {
-        const { userId } = req.params
-
-        const userEvents = await Event.findAll({
-            where: {
-                userId: +userId,
-            }
-        })
-
-        if(!userEvents){
-            return res.status(404).json({ message: 'Event not found'})
-        }
-
-        res.status(200).send(userEvents)
     },   
 
     getEventsCreatedByUser: async (req, res) => {

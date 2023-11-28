@@ -3,12 +3,23 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const UserCreatedEvents = ({ eventList, setEventList }) => {
+  const userId = useSelector((state) => state.userId)
+
+  const [userEvents, setUserEvents] = useState([])
 
   const handleDeleteEvent = async (eventId) => {
       const response = await axios.delete(`/deleteEvent/${eventId}`)
       console.log(response.data)
       setEventList(eventList.filter(event => event.eventId !== eventId))
     }
+  
+useEffect(() => {
+  const getAllUserEvents = async () => {
+    const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
+    setEventList(response.data)
+  }
+  getAllUserEvents()
+}, [userId])
   
   return (
     <div>
@@ -28,12 +39,3 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
 }
 
 export default UserCreatedEvents;
-
-
-// useEffect(() => {
-//   const getAllUserEvents = async () => {
-//     const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
-//     setEventList(response.data)
-//   }
-//   getAllUserEvents()
-// }, [userId])

@@ -37,7 +37,6 @@ app.delete('/deleteUserProfile', userFunctions.deleteUserProfile)
 
 // Event routes:
 app.post('/addUserEvent', eventFunctions.addUserEvent)
-app.get('/getEventDetails/:userId', eventFunctions.getEventDetails)
 app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser)
 app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
 // app.put('/editEvent/:eventId', eventFunctions.editEvent)

@@ -33,18 +33,6 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
         const savedEvent = response.data.event
         addToEventList(savedEvent)
 
-        setEventName('')
-        setVenueName('')
-        setEventDate('')
-        setDuration('')
-        setStreetNumber('')
-        setCity('')
-        setState('')
-        setZipcode('')
-        setDescription('')
-        setFamilyFriendly('')
-        setDogFriendly('')
-
       closeEventCreationForm()
     }
     

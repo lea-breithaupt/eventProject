@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 import CreateUserEvent from '../components/CreateUserEvent'
 import UserCreatedEvents from '../components/UserCreatedEvents'
 import UserUpcomingEvents from '../components/UserUpcomingEvents'
 import UserFavoritedEvents from '../components/UserFavoritedEvents'
-import UserSuggestedEvents from '../components/EventBriteEvents'
 import EventsByZipcode from '../components/EventsByZipcode'
 
 const HomePage = () => {

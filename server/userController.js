@@ -35,7 +35,26 @@ const userFunctions = {
         })
     },
 
-    userProfile: async (req, res) => {
+    getUsersFirstName: async (req, res) => {
+        const userId = req.session.userId
+        if(userId) {
+         const user = await User.findOne({
+            where: {
+                userId: userId
+            }
+        })
+
+        if(user) {
+         const usersFirstName = {
+            firstName: user.firstName
+         }
+         return res.json(usersFirstName)
+        }
+        }
+        res.status(401).json({ message: 'User not found or not logged in.' })
+    },
+
+    getUserProfile: async (req, res) => {
         const { userId } = req.session
 
         const user = await User.findByPk(userId)

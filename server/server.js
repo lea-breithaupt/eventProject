@@ -27,19 +27,19 @@ import eventFunctions from './eventController.js'
 app.post('/login', authFunctions.login)
 app.get('/logout', authFunctions.logout)
 app.get('/sessionCheck', authFunctions.sessionCheck)
-app.get('/getUsersFirstName', authFunctions.getUsersFirstName)
 
 // User routes:
 app.post('/register', userFunctions.register)
-app.get('/userProfile/:userId', userFunctions.userProfile)
+app.get('/getUsersFirstName', userFunctions.getUsersFirstName)
+app.get('/getUserProfile/:userId', userFunctions.getUserProfile)
 app.put('/updateUserProfile/:userId', userFunctions.updateUserProfile)
 app.delete('/deleteUserProfile', userFunctions.deleteUserProfile)
 
 // Event routes:
 app.post('/addUserEvent', eventFunctions.addUserEvent)
 app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser)
-app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
 app.put('/editUserEvent/:eventId', eventFunctions.editUserEvent)
+app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
 app.get('/getEventsByUserZipcode', eventFunctions.getEventsByUserZipcode)
 app.post('/favoriteEvent/:eventId', eventFunctions.favoriteEvent)
 app.get('/getUserFavoritedEvents', eventFunctions.getUserFavoritedEvents)

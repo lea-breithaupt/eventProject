@@ -53,19 +53,55 @@ const eventFunctions = {
         res.status(200).send(userEvents)
     },
 
-    getEventsByUserZipcode: async (req, res) => {
-      const { userId } = req.session
+    editUserEvent: async (req, res) => {
+      const { userId } = req.session;
+      const { eventId } = req.params;
+      const {
+        eventName,
+        venueName,
+        eventDate,
+        duration,
+        streetNumber,
+        city,
+        state,
+        zipcode,
+        description,
+        dogFriendly,
+        familyFriendly
+      } = req.body
     
-      const user = await User.findByPk(userId)
-      const userZipcode = user.zipcode
-    
-      const events = await Event.findAll({
+      const userEvent = await Event.findOne({
         where: {
-          zipcode: userZipcode,
-        },
+          userId: userId,
+          eventId: eventId
+        }
       })
     
-      res.status(200).send(events)
+      if (!userEvent) {
+        return res.status(404).json({ error: 'Event not found or not authorized to edit' })
+      }
+    
+      // Update the event attributes as needed
+      if(userEvent) {
+        userEvent.eventName = eventName
+        userEvent.venueName = venueName
+        userEvent.eventDate = eventDate
+        userEvent.duration = duration
+        userEvent.streetNumber = streetNumber
+        userEvent.city = city
+        userEvent.state = state
+        userEvent.description = description
+        userEvent.zipcode = zipcode
+        userEvent.familyFriendly = familyFriendly
+        userEvent.dogFriendly = dogFriendly
+
+        await userEvent.save()
+    
+        return res.status(200).json({ message: 'Event updated successfully', event: userEvent })
+      } else {
+        console.error('Error updating event:', error)
+        return res.status(500).json({ error: 'Internal server error' })
+      }
     },
 
     deleteEvent: async (req, res) => {
@@ -91,55 +127,19 @@ const eventFunctions = {
         res.status(201).json('Event has been deleted')
       },
 
-      editUserEvent: async (req, res) => {
-        const { userId } = req.session;
-        const { eventId } = req.params;
-        const {
-          eventName,
-          venueName,
-          eventDate,
-          duration,
-          streetNumber,
-          city,
-          state,
-          zipcode,
-          description,
-          dogFriendly,
-          familyFriendly
-        } = req.body
+      getEventsByUserZipcode: async (req, res) => {
+        const { userId } = req.session
       
-        const userEvent = await Event.findOne({
+        const user = await User.findByPk(userId)
+        const userZipcode = user.zipcode
+      
+        const events = await Event.findAll({
           where: {
-            userId: userId,
-            eventId: eventId
-          }
+            zipcode: userZipcode,
+          },
         })
       
-        if (!userEvent) {
-          return res.status(404).json({ error: 'Event not found or not authorized to edit' })
-        }
-      
-        // Update the event attributes as needed
-        if(userEvent) {
-          userEvent.eventName = eventName
-          userEvent.venueName = venueName
-          userEvent.eventDate = eventDate
-          userEvent.duration = duration
-          userEvent.streetNumber = streetNumber
-          userEvent.city = city
-          userEvent.state = state
-          userEvent.description = description
-          userEvent.zipcode = zipcode
-          userEvent.familyFriendly = familyFriendly
-          userEvent.dogFriendly = dogFriendly
-
-          await userEvent.save()
-      
-          return res.status(200).json({ message: 'Event updated successfully', event: userEvent })
-        } else {
-          console.error('Error updating event:', error)
-          return res.status(500).json({ error: 'Internal server error' })
-        }
+        res.status(200).send(events)
       },
 
       favoriteEvent: async (req, res) => {

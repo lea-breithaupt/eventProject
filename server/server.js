@@ -39,9 +39,10 @@ app.delete('/deleteUserProfile', userFunctions.deleteUserProfile)
 app.post('/addUserEvent', eventFunctions.addUserEvent)
 app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser)
 app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
-// app.put('/editEvent/:eventId', eventFunctions.editEvent)
+app.put('/editUserEvent/:eventId', eventFunctions.editUserEvent)
 app.get('/getEventsByUserZipcode', eventFunctions.getEventsByUserZipcode)
-// app.post('/favoriteEvent/:eventId', eventFunctions.favoriteEvent)
-// app.get('/userFavoriteEvents', eventFunctions.userFavoriteEvents)
+app.post('/favoriteEvent/:eventId', eventFunctions.favoriteEvent)
+app.get('/getUserFavoritedEvents', eventFunctions.getUserFavoritedEvents)
+
 
 ViteExpress.listen(app, 5050, () => console.log(`http://localhost:5050`))

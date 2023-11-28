@@ -8,28 +8,32 @@ const UserEventsByZipcode = () => {
 
   useEffect(() => {
     const fetchUserEventsByZipcode = async () => {
-      try {
-        const response = await axios.get('/getEventsByUserZipcode');
-        setUserEvents(response.data);
-      } catch (error) {
-        console.error('Error fetching user events by zipcode:', error);
-      }
-    };
+      const response = await axios.get('/getEventsByUserZipcode');
+      setUserEvents(response.data);
+    }
 
     if (userId) {
-      fetchUserEventsByZipcode();
+      fetchUserEventsByZipcode()
     }
-  }, [userId]);
+  }, [userId])
+
+  const handleFavoriteEvent = async (eventId) => {
+      await axios.post(`/favoriteEvent/${eventId}`, userId)
+      const updatedEvents = userEvents.filter((event) => event.eventId !== eventId)
+      setUserEvents(updatedEvents)
+  }
 
   return (
     <div>
-      <h2>User Events By Zipcode</h2>
+      
       <div>
         {userEvents.map((event) => (
           <div key={event.eventId}>
             <p>{event.eventName}</p>
             <p>{event.venueName}</p>
             <p>{event.eventDate}</p>
+            <button onClick={() => handleFavoriteEvent(event.eventId)}>Favorite</button>
+            <button>Attend</button>
           </div>
         ))}
       </div>

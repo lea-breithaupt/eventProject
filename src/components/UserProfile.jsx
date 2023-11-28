@@ -58,41 +58,37 @@ const UserProfile = () => {
                 <h4>Personal Information:</h4>
                 {editUser && editMode && (
                     <div>
-                        <p>First Name: 
+                        <label>First Name:</label>
                             <input 
                                 name="firstName" 
                                 value={editUser.firstName} 
-                                onChange={handleInputChange} />    
-                        </p>
-                        <p>Last Name: 
+                                onChange={handleInputChange} 
+                            />    
+                        <label>Last Name:</label>
                             <input 
                                 name="lastName" 
                                 value={editUser.lastName} 
                                 onChange={handleInputChange} 
                             />
-                        </p>
-                        <p>Username: 
+                        <label>Username:</label>
                             <input 
                                 name="username" 
                                 value={editUser.username} 
                                 onChange={handleInputChange} 
                             /> 
-                        </p>
-                        <p>Email: 
+                        <label>Email:</label>
                             <input 
                                 name="email" 
                                 value={editUser.email} 
                                 onChange={handleInputChange} 
                             /> 
-                        </p>
-                        <p>Password:
+                        <label>Password:</label>
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 value={editUser.password}
                                 onChange={handleInputChange}
                                 name="password"
                             />
-                        </p>
                         <label>Show Password:
                             <input
                                 type="checkbox"
@@ -100,13 +96,12 @@ const UserProfile = () => {
                                 onChange={togglePasswordVisibility}
                             />
                         </label>
-                        <p>Zipcode: 
+                        <label>Zipcode:</label> 
                             <input 
                                 name="zipcode" 
                                 value={editUser.zipcode} 
                                 onChange={handleInputChange} 
                             />
-                        </p>
                         <button onClick={handleEdit}>Cancel</button>
                         <button onClick={handleSave}>Save</button>
                     </div>
@@ -126,15 +121,6 @@ const UserProfile = () => {
                     </div>
                 )}
             </div>
-        <div>
-            <h4>Created Events:</h4>
-        </div>
-        <div>
-            <h4>Upcoming Events:</h4>
-        </div>
-        <div>
-            <h4>Favorite Events:</h4>
-        </div>
         </div>
     )
 }

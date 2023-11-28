@@ -4,7 +4,7 @@ const initialState = {
     eventCreated: false,
     createdEventDetails: null,
     loggedInUser: null,
-    editMode: false
+    editMode: false,
 }
 
 const reducer = (state = initialState, action) => {

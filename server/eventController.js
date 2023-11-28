@@ -99,74 +99,91 @@ const eventFunctions = {
         }
       },
 
-    // editEvent: async (req, res) => {
-    //   const eventId = req.params.eventId
-    //   const { 
-    //     eventName, 
-    //     venueName, 
-    //     eventDate, 
-    //     duration, 
-    //     streetNumber, 
-    //     city, 
-    //     state, 
-    //     zipcode, 
-    //     description, 
-    //     familyFriendly, 
-    //     dogFriendly
-    //   } = req.body
-
-    //   const eventToUpdate = await Event.findByPk(eventId)
-
-    //   if(!eventToUpdate || eventToUpdate.userId !== req.session.userId) {
-    //     return res.status(404).json({message:'Event not found or unauthorized'})
-    //   }
+      editUserEvent: async (req, res) => {
+        const { userId } = req.session;
+        const { eventId } = req.params;
+        const {
+          eventName,
+          venueName,
+          eventDate,
+          duration,
+          streetNumber,
+          city,
+          state,
+          zipcode,
+          description,
+          dogFriendly,
+          familyFriendly
+        } = req.body
       
-    //     eventToUpdate.eventName = eventName
-    //     eventToUpdate.venueName = venueName
-    //     eventToUpdate.eventDate = eventDate
-    //     eventToUpdate.duration = duration
-    //     eventToUpdate.streetNumber = streetNumber
-    //     eventToUpdate.city = city
-    //     eventToUpdate.state = state
-    //     eventToUpdate.zipcode = zipcode
-    //     eventToUpdate.description = description
-    //     eventToUpdate.familyFriendly = familyFriendly
-    //     eventToUpdate.dogFriendly = dogFriendly
+        // Check if the event exists and is created by the logged-in user
+        const userEvent = await Event.findOne({
+          where: {
+            userId: userId,
+            eventId: eventId
+          }
+        });
+      
+        if (!userEvent) {
+          return res.status(404).json({ error: 'Event not found or not authorized to edit' })
+        }
+      
+        // Update the event attributes as needed
+        if(userEvent) {
+          userEvent.eventName = eventName
+          userEvent.venueName = venueName
+          userEvent.eventDate = eventDate
+          userEvent.duration = duration
+          userEvent.streetNumber = streetNumber
+          userEvent.city = city
+          userEvent.state = state
+          userEvent.description = description
+          userEvent.zipcode = zipcode
+          userEvent.familyFriendly = familyFriendly
+          userEvent.dogFriendly = dogFriendly
 
-    //     await eventToUpdate.save()
-    //     res.status(200).json({ message: 'Event updated successfully', event: eventToUpdate })
-    // },
+          await userEvent.save()
+      
+          return res.status(200).json({ message: 'Event updated successfully', event: userEvent })
+        } else {
+          console.error('Error updating event:', error)
+          return res.status(500).json({ error: 'Internal server error' })
+        }
+      },
 
-    // favoriteEvent: async (req, res) => {
-    //   const { eventId } = req.params
-    //   const { userId } = req.session
+      favoriteEvent: async (req, res) => {
+        const { eventId } = req.params
+        const { userId } = req.session
+      
+        try {
+          // Create a favorite for the logged-in user and specified eventId
+          const newFavorite = await Favorite.create({
+            eventId: eventId,
+            userId: userId,
+            comment: req.body.comment, // If you have a comment field in the request body
+          });
+      
+          res.status(201).json({ message: 'Event favorited successfully!', favorite: newFavorite });
+        } catch (error) {
+          res.status(500).json({ error: 'Unable to favorite the event.' });
+        }
+      },
 
-    //   const existingFavorite = await Favorite.findOne({
-    //     where: {
-    //       userId,
-    //       eventId
-    //     }
-    //   })
-
-    //   if(existingFavorite) {
-    //     return res.status(400).json({ message: 'Event already favorited'})
-    //   }
-
-    //   await Favorite.create({ userId, eventId })
-
-    //   res.status(200).json({ message: 'Event favorited successfully'})
-    // },
-
-    // userFavoriteEvents: async (req, res) => {
-    //   const { userId } = req.session
-
-    //   const userFavorites = await Favorite.findAll({
-    //     where: { userId },
-    //     include: [{ model: Event }]
-    //   })
-
-    //   res.status(200).json(userFavorites)
-    // }
+      getUserFavoritedEvents: async (req, res) => {
+        const { userId } = req.session; // Assuming userId is available in the session
+      
+        try {
+          // Find all favorited events for the logged-in user
+          const userFavoritedEvents = await Favorite.findAll({
+            where: { userId: userId },
+            include: [{ model: Event }], // Assuming you have imported Event model from model.js
+          });
+      
+          res.status(200).json(userFavoritedEvents);
+        } catch (error) {
+          res.status(500).json({ error: 'Unable to fetch user\'s favorited events.' });
+        }
+      },
 }
 
 export default eventFunctions

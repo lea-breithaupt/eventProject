@@ -1,40 +1,27 @@
-import {useState, useEffect } from 'react'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
 
 const UserFavoritedEvents = () => {
-  // const [favoritedEvents, setFavoritedEvents] = useState([]);
+  const [favoritedEvents, setFavoritedEvents] = useState([])
 
-  // useEffect(() => {
-  //   const fetchFavoriteEvents = async () => {
-  //     try {
-  //       const response = await axios.get('/userFavoriteEvents');
-  //       setFavoritedEvents(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching user favorite events:', error);
-  //       // Handle error
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchUserFavoritedEvents = async () => {
+      const response = await axios.get('/getUserFavoritedEvents')
+      setFavoritedEvents(response.data);
+    }
 
-  //   fetchFavoriteEvents();
-  // }, [])
-
-  // const addFavoritedEvent = (newFavoritedEvent) => {
-  //   setFavoritedEvents([...favoritedEvents, newFavoritedEvent])
-  // }
+    fetchUserFavoritedEvents()
+  }, [])
 
   return (
-       <div>
-      {/* <div>
-        {favoritedEvents.map((event) => (
-          <div key={event.eventId}>
-            <p>{event.eventName}</p>
-            <p>{event.venueName}</p> */}
-            {/* Add other event details */}
-            {/* Include a delete button to remove the event from favorites */}
-            {/* <button>Delete</button>
-          </div>
-        ))}
-      </div> */}
+    <div>
+      {favoritedEvents.map((event) => (
+        <div key={event.eventId}>
+          <p>{event.eventName}</p>
+          <p>{event.venueName}</p>
+          <p>{event.eventDate}</p>
+        </div>
+      ))}
     </div>
   )
 }

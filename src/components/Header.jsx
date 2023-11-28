@@ -1,3 +1,7 @@
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav'
+import Navbar from 'react-bootstrap/Navbar'
+import Button from 'react-bootstrap/Button'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -37,34 +41,43 @@ const Header = () => {
   return (
     <div>
       {loggedIn ? (
-       <div>
+       <Navbar bg="dark" data-bs-theme="dark" fixed="top">
+          <Container className="justify-content-end">
+            <Nav>
           <NavLink to='/'>
-            <button>
+            <Button variant="light">
               Home
-            </button>
+            </Button>
           </NavLink>
           <NavLink to={`/user-profile/${userId}`}>
-            <button>
+            <Button variant="light">
               Profile
-            </button>
+            </Button>
           </NavLink>
           <NavLink to='/login'>
-              <button onClick={handleLogout}>
+              <Button variant="light" onClick={handleLogout}>
                 Logout
-              </button>
+              </Button>
           </NavLink>
-         </div>
+          </Nav>
+          </Container>
+         </Navbar>
       ):(
-      <div>
+      <Navbar bg="dark" data-bs-theme="dark" fixed="top">
+        <Container>
         <p>CITY LIMITS!</p>
         <NavLink to='/login'>
-          <button>Login</button>
+        <Button variant="light">
+          Login
+        </Button>
         </NavLink>
         <NavLink to="/create-user-account">
-          <button>Sign Up</button>
+          <Button variant="light">
+            Sign Up
+          </Button>
         </NavLink>
-        
-       </div>
+        </Container>
+       </Navbar>
       )}
     </div>
   )

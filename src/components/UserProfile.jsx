@@ -56,81 +56,72 @@ const UserProfile = () => {
         <div>
             <div>
                 <h4>Personal Information:</h4>
-                {editUser && (
+                {editUser && editMode && (
                     <div>
                         <p>First Name: 
-                            {editMode ? 
-                                <input 
-                                    name="firstName" 
-                                    value={editUser.firstName} 
-                                    onChange={handleInputChange} /> 
-                            : editUser.firstName}
+                            <input 
+                                name="firstName" 
+                                value={editUser.firstName} 
+                                onChange={handleInputChange} />    
                         </p>
                         <p>Last Name: 
-                            {editMode ? 
-                                <input 
-                                    name="lastName" 
-                                    value={editUser.lastName} 
-                                    onChange={handleInputChange} 
-                                /> 
-                            : editUser.lastName}
+                            <input 
+                                name="lastName" 
+                                value={editUser.lastName} 
+                                onChange={handleInputChange} 
+                            />
                         </p>
                         <p>Username: 
-                            {editMode ? 
-                                <input 
-                                    name="username" 
-                                    value={editUser.username} 
-                                    onChange={handleInputChange} 
-                                /> 
-                            : editUser.username}
+                            <input 
+                                name="username" 
+                                value={editUser.username} 
+                                onChange={handleInputChange} 
+                            /> 
                         </p>
                         <p>Email: 
-                            {editMode ? 
-                                <input 
-                                    name="email" 
-                                    value={editUser.email} 
-                                    onChange={handleInputChange} 
-                                /> 
-                            : editUser.email}
+                            <input 
+                                name="email" 
+                                value={editUser.email} 
+                                onChange={handleInputChange} 
+                            /> 
                         </p>
-                        <p>
-                        {editMode ? (
-                            <div>
-                                 <p>Password:
-                                    <input
-                                        type={showPassword ? 'text' : 'password'}
-                                        value={editUser.password}
-                                        onChange={handleInputChange}
-                                        name="password"
-                                    />
-                                </p>
-                                <label>
-                                    Show Password:
-                                    <input
-                                         type="checkbox"
-                                         checked={showPassword}
-                                         onChange={togglePasswordVisibility}
-                                    />
-                                </label>
-                        </div>
-                        ) : (
-                            <p>
-                                Password: {' '}
-                                {showPassword ? editUser.password : '•'.repeat(editUser.password.length)}
-                            </p>
-                        )}
+                        <p>Password:
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                value={editUser.password}
+                                onChange={handleInputChange}
+                                name="password"
+                            />
                         </p>
+                        <label>Show Password:
+                            <input
+                                type="checkbox"
+                                checked={showPassword}
+                                onChange={togglePasswordVisibility}
+                            />
+                        </label>
                         <p>Zipcode: 
-                            {editMode ? 
-                                <input 
-                                    name="zipcode" 
-                                    value={editUser.zipcode} 
-                                    onChange={handleInputChange} 
-                                /> 
-                            : editUser.zipcode}
+                            <input 
+                                name="zipcode" 
+                                value={editUser.zipcode} 
+                                onChange={handleInputChange} 
+                            />
                         </p>
+                        <button onClick={handleEdit}>Cancel</button>
+                        <button onClick={handleSave}>Save</button>
+                    </div>
+                )} 
+                {editUser && !editMode && (
+                    <div>
+                        <p>First Name: {editUser.firstName}</p>
+                        <p>Last Name: {editUser.lastName}</p>
+                        <p>Username: {editUser.username}</p>
+                        <p>Email: {editUser.email}</p>
+                        <p>Password: {' '}
+                            {showPassword ? editUser.password : '•'.repeat(editUser.password.length)}
+                        </p>
+                        <p>Zipcode: {editUser.zipcode}</p>
                         <button onClick={handleEdit}>{editMode ? 'Cancel' : 'Edit'}</button>
-                        {editMode && <button onClick={handleSave}>Save</button>}
                         <button onClick={handleDelete}>Delete Account</button>
                     </div>
                 )}
@@ -149,6 +140,3 @@ const UserProfile = () => {
 }
 
 export default UserProfile
-
-{/* <p>Password: {showPassword ? user.password : '•'.repeat(user.password.length)}</p>
-                <button onClick={togglePasswordVisibility}>Toggle Password Visibility</button> */}

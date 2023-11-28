@@ -46,10 +46,10 @@ const HomePage = () => {
         <div>
           <h2>Welcome, {firstname}</h2>
           <div>
-            <button onClick={toggleEventCreationForm}>
-              {displayEventCreationForm ? 'Close Event Form' : 'Create New Event'}
-            </button>
             {displayEventCreationForm && <CreateUserEvent addToEventList={addToEventList}/>}
+            <button onClick={toggleEventCreationForm}>
+              {displayEventCreationForm ? 'Cancel' : 'Create New Event'}
+            </button>
           </div>
 
           <div>

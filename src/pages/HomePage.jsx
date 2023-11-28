@@ -16,18 +16,30 @@ const HomePage = () => {
   const [eventList, setEventList] = useState([])
   const [firstname, setFirstName] = useState('')
   const [displayEventCreationForm, setDisplayEventCreationForm] = useState(false)
+  const [showEventSuccessMessage, setShowEventSuccessMessage] = useState(false);
+
 
   const addToEventList = (savedEvent) => {
     setEventList([...eventList, savedEvent])
+    setShowEventSuccessMessage(true)
+    setTimeout(() => {
+      setShowEventSuccessMessage(false)
+    }, 2000)
   }
 
   const toggleEventCreationForm = () => {
     console.log(displayEventCreationForm)
-    if(displayEventCreationForm === true) {
-      setDisplayEventCreationForm(false)
-    } else {
-      setDisplayEventCreationForm(true)
-    }
+    setDisplayEventCreationForm((prev) => !prev);
+    setShowEventSuccessMessage(false);
+  }
+
+  const cancelEventCreation = () => {
+    setDisplayEventCreationForm(false);
+    setShowEventSuccessMessage(false);
+  }
+  
+  const closeEventCreationForm = () => {
+    setDisplayEventCreationForm(false);
   }
 
   useEffect(() => {
@@ -46,10 +58,20 @@ const HomePage = () => {
         <div>
           <h2>Welcome, {firstname}</h2>
           <div>
-            {displayEventCreationForm && <CreateUserEvent addToEventList={addToEventList}/>}
-            <button onClick={toggleEventCreationForm}>
-              {displayEventCreationForm ? 'Cancel' : 'Create New Event'}
-            </button>
+            {displayEventCreationForm ? (
+              <div>
+              <CreateUserEvent
+                addToEventList={addToEventList}
+                closeEventCreationForm={closeEventCreationForm}
+              />
+              <button onClick={cancelEventCreation}>Cancel</button>
+            </div>
+            ) : (
+              <button onClick={toggleEventCreationForm}>
+                Create New Event
+              </button>
+            )}
+            {showEventSuccessMessage && <p>Event successfully created!</p>}
           </div>
 
           <div>

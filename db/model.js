@@ -103,11 +103,11 @@ Event.init (
             allowNull: true
         },
         familyFriendly: {
-            type: DataTypes.TEXT,
+            type: DataTypes.BOOLEAN,
             allowNull: true
         },
         dogFriendly: {
-            type: DataTypes.TEXT,
+            type: DataTypes.BOOLEAN,
             allowNull: true
         }
     }, {

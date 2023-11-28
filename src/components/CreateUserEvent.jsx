@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 
-const CreateUserEvent = ({ addToEventList }) => {
+const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
     const userId = useSelector((state) => state.userId)
 
     const [eventName, setEventName] = useState('')
@@ -14,8 +14,8 @@ const CreateUserEvent = ({ addToEventList }) => {
     const [state, setState] = useState('')
     const [zipcode, setZipcode] = useState('')
     const [description, setDescription] = useState('')
-    const [familyFriendly, setFamilyFriendly] = useState('')
-    const [dogFriendly, setDogFriendly] = useState('')
+    const [familyFriendly, setFamilyFriendly] = useState(false)
+    const [dogFriendly, setDogFriendly] = useState(false)
 
     const createNewEvent = async (e) => {
         e.preventDefault()
@@ -35,8 +35,22 @@ const CreateUserEvent = ({ addToEventList }) => {
         })
         const savedEvent = response.data.event
         addToEventList(savedEvent)
-    }
 
+        setEventName('')
+        setVenueName('')
+        setEventDate('')
+        setDuration('')
+        setStreetNumber('')
+        setCity('')
+        setState('')
+        setZipcode('')
+        setDescription('')
+        setFamilyFriendly('')
+        setDogFriendly('')
+
+      closeEventCreationForm();
+    }
+    
   return (
     <div>
             <form onSubmit={createNewEvent}>
@@ -116,13 +130,13 @@ const CreateUserEvent = ({ addToEventList }) => {
                 <input 
                     type='checkbox'
                     checked={familyFriendly}
-                    onChange={(e) => setFamilyFriendly(e.target.value)}
+                    onChange={(e) => setFamilyFriendly(e.target.checked)}
                 />
             <label>Dog Friendly:</label>
                 <input 
                     type='checkbox'
                     checked={dogFriendly}
-                    onChange={(e) => setDogFriendly(e.target.value)}
+                    onChange={(e) => setDogFriendly(e.target.checked)}
                 />
             <button type='submit'>
                 Create Event!

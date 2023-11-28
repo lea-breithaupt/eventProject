@@ -1,46 +1,40 @@
-import axios from 'axios'
-import { useState, useEffect } from 'react'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-const EventsByZipcode = ({ eventsByZipcode, setEventsByZipcode }) => {
-    // const handleFavorite = async (eventId) => {
-    //   try {
-    //     // Call the addToFavorites function passed from the parent component
-    //     await addToFavorites(eventId);
-    //   } catch (error) {
-    //     console.error('Error favoriting event:', error);
-    //   }
-    // };
-//   const [eventsByZipcode, setEventsByZipcode] = useState([])
-
-//   const handleFavorite = async (eventId) => {
-//     await axios.post(`/favoriteEvent/${eventId}`)
-//   }
+const UserEventsByZipcode = () => {
+  const [userEvents, setUserEvents] = useState([]);
+  const userId = useSelector((state) => state.userId);
 
   useEffect(() => {
-    const fetchEventsByZipcode = async () => {
-        const response = await axios.get('/getEventsByUserZipcode')
+    const fetchUserEventsByZipcode = async () => {
+      try {
+        const response = await axios.get('/getEventsByUserZipcode');
+        setUserEvents(response.data);
+      } catch (error) {
+        console.error('Error fetching user events by zipcode:', error);
+      }
+    };
 
-        setEventsByZipcode(response.data)
+    if (userId) {
+      fetchUserEventsByZipcode();
     }
-
-    fetchEventsByZipcode()
-  }, [])
+  }, [userId]);
 
   return (
     <div>
+      <h2>User Events By Zipcode</h2>
       <div>
-        {eventsByZipcode.map((event) => (
+        {userEvents.map((event) => (
           <div key={event.eventId}>
             <p>{event.eventName}</p>
             <p>{event.venueName}</p>
             <p>{event.eventDate}</p>
-            <button>Favorite</button>
-            <button>Attend</button>
-        </div>
+          </div>
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EventsByZipcode
+export default UserEventsByZipcode;

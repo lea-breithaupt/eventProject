@@ -54,33 +54,20 @@ const eventFunctions = {
     },
 
     getEventsByUserZipcode: async (req, res) => {
-      try {
-        const userId = req.session.userId;
-  
-        // Fetch the user's data to get their zipcode
-        const user = await User.findByPk(userId);
-        if (!user) {
-          return res.status(404).json({ message: 'User not found' });
-        }
-  
-        const userZipcode = user.zipcode;
-  
-        // Retrieve events with the same zipcode as the logged-in user
-        const eventsByZipcode = await Event.findAll({
-          where: {
-            zipcode: userZipcode
-          }
-        });
-  
-        if (eventsByZipcode.length === 0) {
-          return res.status(404).json({ message: 'No events found in user\'s zipcode' });
-        }
-  
-        res.status(200).json(eventsByZipcode);
-      } catch (error) {
-        console.error('Error fetching events by user\'s zipcode:', error);
-        res.status(500).json({ message: 'Internal server error' });
-      }
+      const { userId } = req.session;
+    
+      // Fetch user's zipcode
+      const user = await User.findByPk(userId);
+      const userZipcode = user.zipcode;
+    
+      // Find events with matching zipcode
+      const events = await Event.findAll({
+        where: {
+          zipcode: userZipcode,
+        },
+      });
+    
+      res.status(200).send(events);
     },
 
     deleteEvent: async (req, res) => {

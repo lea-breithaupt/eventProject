@@ -96,8 +96,8 @@ const HomePage = () => {
 
           <div>
             <h2>Events happening around your city:</h2>
-            {/* <EventsByZipcode 
-            /> */}
+            <EventsByZipcode 
+            />
           </div>
           
         </div>

@@ -1,9 +1,8 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const UserCreatedEvents = ({ eventList, setEventList }) => {
-  const dispatch = useDispatch()
   const userId = useSelector((state) => state.userId)
 
   const handleDeleteEvent = async (eventId) => {
@@ -12,7 +11,6 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
       setEventList(eventList.filter(event => event.eventId !== eventId))
     }
 
-  
 useEffect(() => {
   const getAllUserEvents = async () => {
     const response = await axios.get(`/getEventsCreatedByUser/${userId}`)

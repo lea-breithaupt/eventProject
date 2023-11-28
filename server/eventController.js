@@ -54,20 +54,18 @@ const eventFunctions = {
     },
 
     getEventsByUserZipcode: async (req, res) => {
-      const { userId } = req.session;
+      const { userId } = req.session
     
-      // Fetch user's zipcode
-      const user = await User.findByPk(userId);
-      const userZipcode = user.zipcode;
+      const user = await User.findByPk(userId)
+      const userZipcode = user.zipcode
     
-      // Find events with matching zipcode
       const events = await Event.findAll({
         where: {
           zipcode: userZipcode,
         },
-      });
+      })
     
-      res.status(200).send(events);
+      res.status(200).send(events)
     },
 
     deleteEvent: async (req, res) => {
@@ -77,26 +75,20 @@ const eventFunctions = {
         if (!userId) {
           return res.status(403).json('User not found')
         }
-      
-        try {
-          const eventToDelete = await Event.findOne({
-            where: {
-              userId,
-              eventId: eventIdToDelete
-            }
-          });
-      
-          if (!eventToDelete) {
-            return res.status(404).json('Event not found')
+        
+        const eventToDelete = await Event.findOne({
+          where: {
+            userId,
+            eventId: eventIdToDelete
           }
+        })
       
-          await eventToDelete.destroy()
-      
-          res.status(201).json('Event has been deleted')
-        } catch (error) {
-          console.error('Error deleting event:', error)
-          res.status(500).json('Internal server error')
+        if (!eventToDelete) {
+          return res.status(404).json('Event not found')
         }
+      
+        await eventToDelete.destroy()
+        res.status(201).json('Event has been deleted')
       },
 
       editUserEvent: async (req, res) => {
@@ -116,13 +108,12 @@ const eventFunctions = {
           familyFriendly
         } = req.body
       
-        // Check if the event exists and is created by the logged-in user
         const userEvent = await Event.findOne({
           where: {
             userId: userId,
             eventId: eventId
           }
-        });
+        })
       
         if (!userEvent) {
           return res.status(404).json({ error: 'Event not found or not authorized to edit' })
@@ -154,35 +145,25 @@ const eventFunctions = {
       favoriteEvent: async (req, res) => {
         const { eventId } = req.params
         const { userId } = req.session
+
+        const newFavorite = await Favorite.create({
+          eventId: eventId,
+          userId: userId,
+          comment: req.body.comment, // If you have a comment field in the request body
+        })
       
-        try {
-          // Create a favorite for the logged-in user and specified eventId
-          const newFavorite = await Favorite.create({
-            eventId: eventId,
-            userId: userId,
-            comment: req.body.comment, // If you have a comment field in the request body
-          });
-      
-          res.status(201).json({ message: 'Event favorited successfully!', favorite: newFavorite });
-        } catch (error) {
-          res.status(500).json({ error: 'Unable to favorite the event.' });
-        }
+          res.status(201).json({ message: 'Event favorited successfully!', favorite: newFavorite })
       },
 
       getUserFavoritedEvents: async (req, res) => {
-        const { userId } = req.session; // Assuming userId is available in the session
+        const { userId } = req.session
       
-        try {
-          // Find all favorited events for the logged-in user
-          const userFavoritedEvents = await Favorite.findAll({
-            where: { userId: userId },
-            include: [{ model: Event }], // Assuming you have imported Event model from model.js
-          });
+        const userFavoritedEvents = await Favorite.findAll({
+          where: { userId: userId },
+          include: [{ model: Event }]
+          })
       
-          res.status(200).json(userFavoritedEvents);
-        } catch (error) {
-          res.status(500).json({ error: 'Unable to fetch user\'s favorited events.' });
-        }
+          res.status(200).json(userFavoritedEvents)
       },
 }
 

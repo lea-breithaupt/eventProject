@@ -5,7 +5,6 @@ import HomePage from './pages/HomePage'
 import Header from './components/Header'
 import CreateUserAccountPage from './pages/CreateUserAccountPage'
 import UserProfilePage from './pages/UserProfilePage'
-import EventPage from './pages/EventPage'
 import LoginForm from './components/LoginForm'
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
           path='/user-profile/:userId' 
           element={<UserProfilePage />} 
           />
-        <Route path='/event-page/:eventId' element={<EventPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -53,94 +53,94 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
     
   return (
     <div>
-            <form onSubmit={createNewEvent}>
-            <label>Event Name:</label>
-                <input 
-                    placeholder='Event Name'
-                    type='text'
-                    value={eventName}
-                    onChange={(e) => setEventName(e.target.value)}
-                    required={true}
-                />
-            <label>Venue:</label>
-                <input 
-                    placeholder='Venue'
-                    type='text'
-                    value={venueName}
-                    onChange={(e) => setVenueName(e.target.value)}
-                    required={true}
-                />
-            <label>Date:</label>
-                <input 
-                    placeholder='Date'
-                    type='date'
-                    value={eventDate}
-                    onChange={(e) => setEventDate(e.target.value)}
-                    required={true}
-                />
-            <label>Time:</label>
-                <input 
-                    placeholder='Time'
-                    type='time'
-                    value={duration}
-                    onChange={(e) => setDuration(e.target.value)}
-                    required={true}
-                />
-            <label>Street Number:</label>
-                <input 
-                    placeholder='Street Number'
-                    type='text'
-                    value={streetNumber}
-                    onChange={(e) => setStreetNumber(e.target.value)}
-                    required={true}
-                />
-            <label>City:</label>
-                <input 
-                    placeholder='City'
-                    type='text'
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    required={true}
-                />
-            <label>State:</label>
-                <input 
-                    placeholder='State'
-                    type='text'
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}
-                    required={true}
-                />
-            <label>Zipcode:</label>
-                <input 
-                    placeholder='Zipcode'
-                    type='text'
-                    value={zipcode}
-                    onChange={(e) => setZipcode(e.target.value)}
-                    required={true}
-                />
-            <label>Description:</label>
-                <input 
-                    placeholder='Description'
-                    type='text'
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required={true}
-                />
-            <label>Family Friendly:</label>
-                <input 
-                    type='checkbox'
-                    checked={familyFriendly}
-                    onChange={(e) => setFamilyFriendly(e.target.checked)}
-                />
-            <label>Dog Friendly:</label>
-                <input 
-                    type='checkbox'
-                    checked={dogFriendly}
-                    onChange={(e) => setDogFriendly(e.target.checked)}
-                />
-            <button type='submit'>
-                Create Event!
-            </button>
+        <form onSubmit={createNewEvent}>
+        <label>Event Name:</label>
+            <input 
+                placeholder='Event Name'
+                type='text'
+                value={eventName}
+                onChange={(e) => setEventName(e.target.value)}
+                required={true}
+            />
+        <label>Venue:</label>
+            <input 
+                placeholder='Venue'
+                type='text'
+                value={venueName}
+                onChange={(e) => setVenueName(e.target.value)}
+                required={true}
+            />
+        <label>Date:</label>
+            <input 
+                placeholder='Date'
+                type='date'
+                value={eventDate}
+                onChange={(e) => setEventDate(e.target.value)}
+                required={true}
+            />
+        <label>Time:</label>
+            <input 
+                placeholder='Time'
+                type='time'
+                value={duration}
+                onChange={(e) => setDuration(e.target.value)}
+                required={true}
+            />
+        <label>Street Number:</label>
+            <input 
+                placeholder='Street Number'
+                type='text'
+                value={streetNumber}
+                onChange={(e) => setStreetNumber(e.target.value)}
+                required={true}
+            />
+        <label>City:</label>
+            <input 
+                placeholder='City'
+                type='text'
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                required={true}
+            />
+        <label>State:</label>
+            <input 
+                placeholder='State'
+                type='text'
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                required={true}
+            />
+        <label>Zipcode:</label>
+            <input 
+                placeholder='Zipcode'
+                type='text'
+                value={zipcode}
+                onChange={(e) => setZipcode(e.target.value)}
+                required={true}
+            />
+        <label>Description:</label>
+            <input 
+                placeholder='Description'
+                type='text'
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                required={true}
+            />
+        <label>Family Friendly:</label>
+            <input 
+                type='checkbox'
+                checked={familyFriendly}
+                onChange={(e) => setFamilyFriendly(e.target.checked)}
+            />
+        <label>Dog Friendly:</label>
+            <input 
+                type='checkbox'
+                checked={dogFriendly}
+                onChange={(e) => setDogFriendly(e.target.checked)}
+            />
+        <button type='submit'>
+            Create Event!
+        </button>
         </form>
     </div>
   )

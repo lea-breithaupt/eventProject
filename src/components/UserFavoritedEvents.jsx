@@ -5,12 +5,12 @@ const UserFavoritedEvents = () => {
   const [favoritedEvents, setFavoritedEvents] = useState([])
 
   useEffect(() => {
-    const fetchUserFavoritedEvents = async () => {
+    const getUserFavoritedEvents = async () => {
       const response = await axios.get('/getUserFavoritedEvents')
-      setFavoritedEvents(response.data);
+      setFavoritedEvents(response.data)
     }
 
-    fetchUserFavoritedEvents()
+    getUserFavoritedEvents()
   }, [])
 
   return (

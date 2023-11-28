@@ -44,38 +44,43 @@ const Header = () => {
        <Navbar bg="dark" data-bs-theme="dark" fixed="top">
           <Container className="justify-content-end">
             <Nav>
-          <NavLink to='/'>
-            <Button variant="light">
-              Home
-            </Button>
-          </NavLink>
-          <NavLink to={`/user-profile/${userId}`}>
-            <Button variant="light">
-              Profile
-            </Button>
-          </NavLink>
-          <NavLink to='/login'>
-              <Button variant="light" onClick={handleLogout}>
-                Logout
-              </Button>
-          </NavLink>
-          </Nav>
+              <NavLink to='/'>
+                <Button variant="light">
+                  Home
+                </Button>
+              </NavLink>
+              <NavLink to={`/user-profile/${userId}`}>
+                <Button variant="light">
+                  Profile
+                </Button>
+              </NavLink>
+              <NavLink to='/login'>
+                <Button variant="light" onClick={handleLogout}>
+                  Logout
+                </Button>
+              </NavLink>
+            </Nav>
           </Container>
          </Navbar>
       ):(
       <Navbar bg="dark" data-bs-theme="dark" fixed="top">
         <Container>
-        <p>CITY LIMITS!</p>
-        <NavLink to='/login'>
-        <Button variant="light">
-          Login
-        </Button>
-        </NavLink>
-        <NavLink to="/create-user-account">
-          <Button variant="light">
-            Sign Up
-          </Button>
-        </NavLink>
+          <p>CITY LIMITS!</p>
+          <NavLink to='/'>
+            <Button variant="light">
+              Home
+            </Button>
+          </NavLink>
+          <NavLink to='/login'>
+            <Button variant="light">
+              Login
+            </Button>
+          </NavLink>
+          <NavLink to="/create-user-account">
+            <Button variant="light">
+              Sign Up
+            </Button>
+          </NavLink>
         </Container>
        </Navbar>
       )}

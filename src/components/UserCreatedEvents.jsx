@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const UserCreatedEvents = ({ eventList, setEventList }) => {
+  const dispatch = useDispatch()
   const userId = useSelector((state) => state.userId)
+  const editModeEventId = useSelector((state) => state.eventId)
 
   const [editEvent, setEditEvent] = useState({
     eventName: '',
@@ -26,10 +28,38 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
     setEventList(eventList.filter(event => event.eventId !== eventId))
   }
 
+  const handleEditEvent = async (eventId) => {
+      // Dispatch action to set edit mode and eventId
+      dispatch({ 
+        type: 'EDIT_MODE_EVENTID', 
+        payload: eventId 
+      })
+  
+      // Fetch the event details using Axios
+      const response = await axios.get(`/getEventDetails/${eventId}`)
+      const selectedEvent = response.data
+  
+      // Set the retrieved event in edit mode
+      setEditEvent(selectedEvent)
+  }
+
+  const handleSaveEdit = async () => {
+    await axios.put(`/editUserEvent/${editEvent.eventId}`, editEvent)
+
+    const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
+    setEventList(response.data)
+    setEditEvent(response.data)
+    dispatch({ 
+      type: 'EDIT_MODE_EVENTID', 
+      payload: null 
+    })
+  }
+
 useEffect(() => {
   const getAllUserEvents = async () => {
     const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
     setEventList(response.data)
+    setEditEvent(response.data)
   }
   getAllUserEvents()
 }, [userId])
@@ -39,7 +69,7 @@ return (
     <div>
       {eventList.map((event) => (
         <div key={event.eventId}>
-          {editEvent && (
+          {editModeEventId === event.eventId ? (
             <div>
               <label>Event Name:</label>
                 <input 
@@ -139,16 +169,15 @@ return (
                     dogFriendly: e.target.checked
                   })}
                 />
-              <button>Cancel</button>
-              <button>Save</button>
+              <button onClick={() => dispatch({ type: 'EDIT_MODE_EVENTID', payload: null })}>Cancel</button>
+              <button onClick={handleSaveEdit}>Save</button>
             </div>
-          )}
-          {editEvent && (
-            <div>
-              <p>{editEvent.eventName}</p>
-              <p>{editEvent.venueName}</p>
-              <p>{editEvent.eventDate}</p>
-              <button>Edit</button>
+            ) : (
+              <div>
+              <p>{event.eventName}</p>
+              <p>{event.venueName}</p>
+              <p>{event.eventDate}</p>
+              <button onClick={() => handleEditEvent(event.eventId)}>Edit</button>
               <button onClick={() => handleDeleteEvent(event.eventId)}>Delete Event</button>
             </div>
           )}

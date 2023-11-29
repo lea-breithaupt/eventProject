@@ -40,6 +40,7 @@ app.post('/addUserEvent', eventFunctions.addUserEvent)
 app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser)
 app.put('/editUserEvent/:eventId', eventFunctions.editUserEvent)
 app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
+app.get('/getEventDetails/:eventId', eventFunctions.getEventDetailsById)
 app.get('/getEventsByUserZipcode', eventFunctions.getEventsByUserZipcode)
 
 ViteExpress.listen(app, 5050, () => console.log(`http://localhost:5050`))

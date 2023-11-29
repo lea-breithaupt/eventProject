@@ -54,6 +54,11 @@ const UserProfile = () => {
             const response = await axios.get(`/getUserProfile/${userId}`)
             setUser(response.data)
             setEditUser(response.data)
+
+            dispatch({
+                type: 'EDIT_MODE',
+                payload: false
+            })
         }
         
         getUserProfile()

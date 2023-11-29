@@ -12,8 +12,6 @@ const Header = () => {
   const userId = useSelector((state) => state.userId)
   const loggedIn = useSelector((state) => state.isLoggedIn)
 
-  const [firstname, setFirstName] = useState('')
-
   const sessionCheck = async () => {
     await axios.get('/sessionCheck')
       .then(res => {
@@ -51,6 +49,10 @@ const Header = () => {
                   Home
                 </Button>
               </NavLink>
+              <p>Zipcode</p>
+              <Button variant="light">
+                Change Location
+              </Button>
               <NavLink to={`/user-profile/${userId}`}>
                 <Button variant="light">
                   Profile

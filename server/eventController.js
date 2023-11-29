@@ -126,6 +126,25 @@ const eventFunctions = {
         res.status(201).json('Event has been deleted')
       },
 
+      getEventDetailsById: async (req, res) => {
+        try {
+          const { eventId } = req.params;
+      
+          const eventDetails = await Event.findOne({
+            where: { eventId: eventId }
+          });
+      
+          if (!eventDetails) {
+            return res.status(404).json({ error: 'Event not found' });
+          }
+      
+          return res.status(200).json(eventDetails);
+        } catch (error) {
+          console.error('Error fetching event details:', error);
+          return res.status(500).json({ error: 'Internal server error' });
+        }
+      },
+
       getEventsByUserZipcode: async (req, res) => {
         const { userId } = req.session
       

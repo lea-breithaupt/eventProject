@@ -1,11 +1,11 @@
 const initialState = {
     userId: null,
+    eventId: null,
     isLoggedIn: false,
     eventCreated: false,
     createdEventDetails: null,
     loggedInUser: null,
     editMode: false,
-    editEventId: null
 }
 
 const reducer = (state = initialState, action) => {
@@ -50,11 +50,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 loggedInUser: action.payload
             }
-        case 'EDIT_MODE_EVENT':
+        
+        case 'EDIT_MODE_EVENTID':
             return {
                 ...state,
                 editMode: true,
-                editEventId: action.payload
+                eventId: action.payload
             }
 
         default:

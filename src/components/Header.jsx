@@ -11,6 +11,10 @@ const Header = () => {
   const dispatch = useDispatch()
   const userId = useSelector((state) => state.userId)
   const loggedIn = useSelector((state) => state.isLoggedIn)
+  const userZipcode = useSelector((state) => state.userZipcode)
+
+  const [editZipcodeMode, setEditZipcodeMode] = useState(false)
+  const [newZipcode, setNewZipcode] = useState('')
 
   const sessionCheck = async () => {
     await axios.get('/sessionCheck')
@@ -26,6 +30,37 @@ const Header = () => {
       })
   }
 
+  useEffect(() => {
+    sessionCheck()
+  }, [])
+
+    const getUserZipcode = async () => {
+        const response = await axios.get(`/getUserProfile/${userId}`)
+        dispatch({
+          type: 'UPDATE_USER_ZIPCODE',
+          payload: response.data.zipcode
+        })
+    }
+
+  useEffect(() => {
+    if (userId) {
+      getUserZipcode();
+    }
+  }, [userId]);
+
+  const handleChangeZipcode = async () => {
+      await axios.put(`/updateUserZipcode/${userId}`, { zipcode: newZipcode })
+      dispatch({
+        type: 'UPDATE_USER_ZIPCODE',
+        payload: newZipcode
+      })
+      setEditZipcodeMode(false)
+  }
+  
+  const handleEditZipcode = () => {
+    setEditZipcodeMode(true)
+  } 
+
   const handleLogout = async () => {
       await axios.get('/logout')
       dispatch({
@@ -33,10 +68,6 @@ const Header = () => {
       })
       console.log('User logged out')
   }
-
-  useEffect(() => {
-    sessionCheck()
-  }, [])
 
   return (
     <div>
@@ -49,10 +80,24 @@ const Header = () => {
                   Home
                 </Button>
               </NavLink>
-              <p>Zipcode</p>
-              <Button variant="light">
-                Change Location
-              </Button>
+              <p>{userZipcode}</p>
+                {editZipcodeMode ? (
+                <div>
+                  <input
+                    type="text"
+                    className="text-white" 
+                    value={newZipcode}
+                    onChange={(e) => setNewZipcode(e.target.value)}
+                  />
+                  <Button variant="light" onClick={handleChangeZipcode}>
+                    Set Location
+                  </Button>
+                </div>
+              ) : (
+                <Button variant="light" onClick={handleEditZipcode}>
+                  Change Location
+                </Button>
+              )}
               <NavLink to={`/user-profile/${userId}`}>
                 <Button variant="light">
                   Profile

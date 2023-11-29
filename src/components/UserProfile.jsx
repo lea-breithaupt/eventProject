@@ -44,6 +44,14 @@ const UserProfile = () => {
             type: 'EDIT_MODE'
         })
 
+        await axios.put(`/updateUserProfile/${userId}`, editUser);
+
+    // Update Redux store with the new zipcode
+    dispatch({
+      type: 'UPDATE_USER_ZIPCODE',
+      payload: editUser.zipcode,
+    })
+
         const response = await axios.get(`/getUserProfile/${userId}`)
         setUser(response.data)
         setEditUser(response.data)

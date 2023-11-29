@@ -33,6 +33,7 @@ app.post('/register', userFunctions.register)
 app.get('/getUsersFirstName', userFunctions.getUsersFirstName)
 app.get('/getUserProfile/:userId', userFunctions.getUserProfile)
 app.put('/updateUserProfile/:userId', userFunctions.updateUserProfile)
+app.put('/updateUserZipcode/:userId', userFunctions.updateUserZipcode)
 app.delete('/deleteUserProfile', userFunctions.deleteUserProfile)
 
 // Event routes:

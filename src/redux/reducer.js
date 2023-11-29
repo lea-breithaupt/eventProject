@@ -6,6 +6,7 @@ const initialState = {
     createdEventDetails: null,
     loggedInUser: null,
     editMode: false,
+    userZipcode: null,
 }
 
 const reducer = (state = initialState, action) => {
@@ -56,6 +57,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 editMode: true,
                 eventId: action.payload
+            }
+        
+        case 'UPDATE_USER_ZIPCODE':
+            return {
+                ...state,
+                userZipcode: action.payload
             }
 
         default:

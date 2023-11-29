@@ -1,35 +1,31 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const UserEventsByZipcode = () => {
-  const [userEvents, setUserEvents] = useState([]);
-  const userId = useSelector((state) => state.userId);
+  const [userEvents, setUserEvents] = useState([])
+  const userId = useSelector((state) => state.userId)
 
   const handleFavoriteEvent = async (eventId) => {
-    try {
-      await axios.post(`/favoriteEvent/${eventId}`, userId);
-      const updatedEvents = userEvents.filter((event) => event.eventId !== eventId);
-      setUserEvents(updatedEvents);
-    } catch (error) {
-      console.error('Error favoriting event:', error);
-    }
-  };
+      await axios.post(`/favoriteEvent/${eventId}`, userId)
+      const updatedEvents = userEvents.filter((event) => event.eventId !== eventId)
+      setUserEvents(updatedEvents)
+  }
 
   useEffect(() => {
     const getUserEventsByZipcode = async () => {
       try {
-        const response = await axios.get('/getEventsByUserZipcode');
+        const response = await axios.get('/getEventsByUserZipcode')
         setUserEvents(response.data);
       } catch (error) {
-        console.error('Error fetching events:', error);
+        console.error('Error fetching events:', error)
       }
-    };
+    }
 
     if (userId) {
-      getUserEventsByZipcode();
+      getUserEventsByZipcode()
     }
-  }, [userId]);
+  }, [userId])
 
   return (
     <div>
@@ -45,7 +41,7 @@ const UserEventsByZipcode = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserEventsByZipcode;
+export default UserEventsByZipcode

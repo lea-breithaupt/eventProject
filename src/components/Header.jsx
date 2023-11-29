@@ -12,6 +12,8 @@ const Header = () => {
   const userId = useSelector((state) => state.userId)
   const loggedIn = useSelector((state) => state.isLoggedIn)
 
+  const [firstname, setFirstName] = useState('')
+
   const sessionCheck = async () => {
     await axios.get('/sessionCheck')
       .then(res => {
@@ -44,7 +46,7 @@ const Header = () => {
        <Navbar bg="dark" data-bs-theme="dark" fixed="top">
           <Container className="justify-content-end">
             <Nav>
-              <NavLink to='/'>
+              <NavLink to={`/user-main-page/${userId}`}>
                 <Button variant="light">
                   Home
                 </Button>
@@ -54,7 +56,7 @@ const Header = () => {
                   Profile
                 </Button>
               </NavLink>
-              <NavLink to='/login'>
+              <NavLink to='/'>
                 <Button variant="light" onClick={handleLogout}>
                   Logout
                 </Button>
@@ -69,16 +71,6 @@ const Header = () => {
           <NavLink to='/'>
             <Button variant="light">
               Home
-            </Button>
-          </NavLink>
-          <NavLink to='/login'>
-            <Button variant="light">
-              Login
-            </Button>
-          </NavLink>
-          <NavLink to="/create-user-account">
-            <Button variant="light">
-              Sign Up
             </Button>
           </NavLink>
         </Container>

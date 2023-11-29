@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios'
 
 const UserProfile = () => {
     const dispatch = useDispatch()
@@ -8,16 +8,15 @@ const UserProfile = () => {
     const editMode = useSelector((state) => state.editMode)
 
     const [user, setUser] = useState(null)
-    const [editUser, setEditUser] = useState(null)
+    const [editUser, setEditUser] = useState({
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        password: '',
+        zipcode: ''
+    })
     const [showPassword, setShowPassword] = useState(false)
-
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [zipcode, setZipcode] = useState('')
 
     const handleDelete = async () => {
         await axios.delete('/deleteUserProfile')
@@ -46,8 +45,8 @@ const UserProfile = () => {
         })
 
         const response = await axios.get(`/getUserProfile/${userId}`)
-        setUser(response.data);
-        setEditUser(response.data);
+        setUser(response.data)
+        setEditUser(response.data)
     }
 
     useEffect(() => {
@@ -68,34 +67,34 @@ const UserProfile = () => {
                     <div>
                         <label>First Name:</label>
                             <input 
-                                name="firstName" 
+                                // name="firstName" 
                                 value={editUser.firstName} 
-                                onChange={(e) => setFirstName(e.target.value)} 
+                                onChange={(e) => setEditUser({ ...editUser, firstName: e.target.value })} 
                             />    
                         <label>Last Name:</label>
                             <input 
-                                name="lastName" 
+                                // name="lastName" 
                                 value={editUser.lastName} 
-                                onChange={(e) => setLastName(e.target.value)} 
+                                onChange={(e) => setEditUser({ ...editUser, lastName: e.target.value })} 
                             />
                         <label>Username:</label>
                             <input 
-                                name="username" 
+                                // name="username" 
                                 value={editUser.username} 
-                                onChange={(e) => setUsername(e.target.value)} 
+                                onChange={(e) => setEditUser({ ...editUser, username: e.target.value })}
                             /> 
                         <label>Email:</label>
                             <input 
-                                name="email" 
+                                // name="email" 
                                 value={editUser.email} 
-                                onChange={(e) => setEmail(e.target.value)} 
+                                onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
                             /> 
                         <label>Password:</label>
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 value={editUser.password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                name="password"
+                                onChange={(e) => setEditUser({ ...editUser, password: e.target.value })}
+                                // name="password"
                             />
                         <label>Show Password:
                             <input
@@ -106,9 +105,9 @@ const UserProfile = () => {
                         </label>
                         <label>Zipcode:</label> 
                             <input 
-                                name="zipcode" 
+                                // name="zipcode" 
                                 value={editUser.zipcode} 
-                                onChange={(e) => setZipcode(e.target.value)} 
+                                onChange={(e) => setEditUser({ ...editUser, zipcode: e.target.value })}
                             />
                         <button onClick={handleEdit}>Cancel</button>
                         <button onClick={handleSave}>Save</button>

@@ -179,4 +179,4 @@ Category.belongsToMany(Event, {through: 'EventCategories'})
 User.belongsToMany(Category, {through: 'UserPreferences'})
 Category.belongsToMany(User, {through: 'UserPreferences'})
 
-Favorite.belongsTo(Event, { foreignKey: 'eventId' })
+Favorite.belongsTo(Event, { foreignKey: 'eventId' });

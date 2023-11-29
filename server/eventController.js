@@ -81,7 +81,6 @@ const eventFunctions = {
         return res.status(404).json({ error: 'Event not found or not authorized to edit' })
       }
     
-      // Update the event attributes as needed
       if(userEvent) {
         userEvent.eventName = eventName
         userEvent.venueName = venueName
@@ -140,30 +139,6 @@ const eventFunctions = {
         })
       
         res.status(200).send(events)
-      },
-
-      favoriteEvent: async (req, res) => {
-        const { eventId } = req.params
-        const { userId } = req.session
-
-        const newFavorite = await Favorite.create({
-          eventId: eventId,
-          userId: userId,
-          comment: req.body.comment, // If you have a comment field in the request body
-        })
-      
-          res.status(201).json({ message: 'Event favorited successfully!', favorite: newFavorite })
-      },
-
-      getUserFavoritedEvents: async (req, res) => {
-        const { userId } = req.session
-      
-        const userFavoritedEvents = await Favorite.findAll({
-          where: { userId: userId },
-          include: [{ model: Event }]
-          })
-      
-          res.status(200).json(userFavoritedEvents)
       },
 }
 

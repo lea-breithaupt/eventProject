@@ -41,8 +41,5 @@ app.get('/getEventsCreatedByUser/:userId', eventFunctions.getEventsCreatedByUser
 app.put('/editUserEvent/:eventId', eventFunctions.editUserEvent)
 app.delete('/deleteEvent/:eventId', eventFunctions.deleteEvent)
 app.get('/getEventsByUserZipcode', eventFunctions.getEventsByUserZipcode)
-app.post('/favoriteEvent/:eventId', eventFunctions.favoriteEvent)
-app.get('/getUserFavoritedEvents', eventFunctions.getUserFavoritedEvents)
-
 
 ViteExpress.listen(app, 5050, () => console.log(`http://localhost:5050`))

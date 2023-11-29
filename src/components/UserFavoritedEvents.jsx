@@ -1,17 +1,26 @@
-import axios from 'axios'
+import axios from 'axios';
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 const UserFavoritedEvents = () => {
-  const [favoritedEvents, setFavoritedEvents] = useState([])
+  const userId = useSelector((state) => state.userId)
+  const [favoritedEvents, setFavoritedEvents] = useState([]);
 
   useEffect(() => {
     const getUserFavoritedEvents = async () => {
-      const response = await axios.get('/getUserFavoritedEvents')
-      setFavoritedEvents(response.data)
-    }
+      try {
+        const response = await axios.get('/getUserFavoritedEvents', {
+          params: { userId }, // Sending userId as a query parameter or adjust based on your server's requirement
+        });
+        setFavoritedEvents(response.data);
+      } catch (error) {
+        console.error('Error fetching favorited events:', error);
+      }
+    };
 
-    getUserFavoritedEvents()
-  }, [])
+    getUserFavoritedEvents();
+  }, [userId]);
+
 
   return (
     <div>
@@ -23,7 +32,7 @@ const UserFavoritedEvents = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default UserFavoritedEvents
+export default UserFavoritedEvents;

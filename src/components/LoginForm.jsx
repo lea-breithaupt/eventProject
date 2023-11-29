@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const userId = useSelector((state) => state.userId)
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -25,7 +26,7 @@ const Login = () => {
                     payload: res.data.userId
                 })
                 console.log('User logged in')
-                navigate("/")
+                navigate(`/user-main-page/${res.data.userId}`)
             })
             .catch(err => {
                 console.log(err)

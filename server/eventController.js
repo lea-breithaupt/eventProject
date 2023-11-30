@@ -5,6 +5,7 @@ const eventFunctions = {
         if(req.session.userId) {
           const { 
               eventName, 
+              eventImgPath,
               venueName, 
               eventDate, 
               duration, 
@@ -19,6 +20,7 @@ const eventFunctions = {
 
           const newUserEvent = await Event.create({
               eventName,
+              eventImgPath,
               venueName,
               eventDate,
               duration,
@@ -58,6 +60,7 @@ const eventFunctions = {
       const { eventId } = req.params;
       const {
         eventName,
+        eventImgPath,
         venueName,
         eventDate,
         duration,
@@ -83,6 +86,7 @@ const eventFunctions = {
     
       if(userEvent) {
         userEvent.eventName = eventName
+        userEvent.eventImgPath = eventImgPath
         userEvent.venueName = venueName
         userEvent.eventDate = eventDate
         userEvent.duration = duration

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import axios from 'axios'
 
 const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
+    const [eventImgPath, setEventImgPath] = useState('')
     const [eventName, setEventName] = useState('')
     const [venueName, setVenueName] = useState('')
     const [eventDate, setEventDate] = useState('')
@@ -19,6 +20,7 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
 
         const response = await axios.post(`/addUserEvent`, {
             eventName,
+            eventImgPath,
             venueName,
             eventDate,
             duration,
@@ -39,6 +41,12 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
   return (
     <div>
         <form onSubmit={createNewEvent}>
+            <input 
+                placeholder='Event Img'
+                type="file"
+                value={eventImgPath}
+                onChange={(e) => setEventImgPath(e.target.value)}
+            />
         <label>Event Name:</label>
             <input 
                 placeholder='Event Name'

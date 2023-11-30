@@ -32,6 +32,7 @@ const UserEventsByZipcode = () => {
       <div>
         {userEvents.map((event) => (
           <div key={event.eventId}>
+            <img src={event.eventImgPath} alt="Event" />
             <p>{event.eventName}</p>
             <p>{event.venueName}</p>
             <p>{event.eventDate}</p>

@@ -48,14 +48,19 @@ const Header = () => {
     }
   }, [userId]);
 
-  const handleChangeZipcode = async () => {
-      await axios.put(`/updateUserZipcode/${userId}`, { zipcode: newZipcode })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (editZipcodeMode) {
+      await axios.put(`/updateUserZipcode/${userId}`, { zipcode: newZipcode });
       dispatch({
         type: 'UPDATE_USER_ZIPCODE',
         payload: newZipcode
-      })
-      setEditZipcodeMode(false)
-  }
+      });
+      setEditZipcodeMode(false);
+    } else {
+      setEditZipcodeMode(true);
+    }
+  };
   
   const handleEditZipcode = () => {
     setEditZipcodeMode(true)
@@ -72,56 +77,63 @@ const Header = () => {
   return (
     <div>
       {loggedIn ? (
-       <Navbar bg="dark" data-bs-theme="dark" fixed="top">
-          <Container className="justify-content-end">
+       <Navbar>
+          <Container>
             <Nav>
               <NavLink to={`/user-main-page/${userId}`}>
-                <Button variant="light">
+                <button>
                   Home
-                </Button>
+                </button>
               </NavLink>
               <p>{userZipcode}</p>
+              <form onSubmit={handleSubmit}>
                 {editZipcodeMode ? (
-                <div>
-                  <input
-                    type="text"
-                    className="text-white" 
-                    value={newZipcode}
-                    onChange={(e) => setNewZipcode(e.target.value)}
-                  />
-                  <Button variant="light" onClick={handleChangeZipcode}>
-                    Set Location
-                  </Button>
-                </div>
-              ) : (
-                <Button variant="light" onClick={handleEditZipcode}>
-                  Change Location
-                </Button>
-              )}
+                  <div>
+                    <input
+                      type="text"
+                      className="text-white"
+                      placeholder='Search by Zipcode...'
+                      value={newZipcode}
+                      onChange={(e) => setNewZipcode(e.target.value)}
+                    />
+                    <button type="submit">
+                      Set Location
+                    </button>
+                  </div>
+                ) : (
+                  <button onClick={() => setEditZipcodeMode(true)}>
+                    Change Location
+                  </button>
+                )}
+              </form>
               <NavLink to={`/user-profile/${userId}`}>
-                <Button variant="light">
+                <button>
                   Profile
-                </Button>
+                </button>
               </NavLink>
               <NavLink to='/'>
-                <Button variant="light" onClick={handleLogout}>
+                <button onClick={handleLogout}>
                   Logout
-                </Button>
+                </button>
               </NavLink>
             </Nav>
           </Container>
          </Navbar>
       ):(
-      <Navbar bg="dark" data-bs-theme="dark" fixed="top">
-        <Container>
-          <p>CITY LIMITS!</p>
-          <NavLink to='/'>
-            <Button variant="light">
-              Home
-            </Button>
-          </NavLink>
-        </Container>
-       </Navbar>
+<Navbar className="bg-body-tertiary">
+<Container>
+  <Navbar.Brand to='/'>
+    <img
+      alt=""
+      src="https://www.canva.com/design/DAF1nTcvHs0/IBiXEHDbcN9Vu8IRBv9beQ/edit?utm_content=DAF1nTcvHs0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+      width="30"
+      height="30"
+      className="d-inline-block align-top"
+    />{' '}
+    CITY LIMITS
+  </Navbar.Brand>
+</Container>
+</Navbar>
       )}
     </div>
   )

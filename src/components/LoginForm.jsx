@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { InputGroup, FormControl } from 'react-bootstrap'
+import { BsFillEyeFill, BsFillEyeSlashFill } from 'react-icons/bs'
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -35,30 +37,52 @@ const Login = () => {
     } 
 
   return (
-    <div>
-        <form id='loginForm' onSubmit={handleSubmit}>
-            <h3>Username:</h3>
-            <input 
-                placeholder='Username'
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required={true}
-            />
-            <h3>Password:</h3>
-            <input 
-                placeholder='Password'
-                type={showPassword ? 'text': 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required={true}
-            />
-            <label>Show Password</label>
-            <input 
-                type='checkbox'
-                checked={showPassword}
-                onChange={togglePasswordVisibility}
-            />
-            <button type='sumbit'>Login</button>
+    <div className='Auth-form-container'>
+        <form className='Auth-form' onSubmit={handleSubmit}>
+            <div className='Auth-form-content'>
+                <h3 className='Auth-form-title'>Sign In</h3>
+                <div className='text-center'>
+                    Not registered yet?{" "}
+                    <NavLink to="/create-user-account" className='link-primary'>
+                        Sign Up
+                    </NavLink>
+                </div>
+                <div className='form-group mt-3'>
+                    <label>Username:</label>
+                    <input
+                        className='form-control mt-1'
+                        placeholder='Username'
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required={true}
+                    />
+                </div>
+                <div className='form-group mt-3'>
+            <label>Password:</label>
+            <InputGroup>
+                <FormControl
+                    className='form-control mt-1'
+                    placeholder='Password'
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required={true}
+                />
+                <InputGroup.Text 
+                    // className="bg-primary text-white"
+                    onClick={togglePasswordVisibility} 
+                    style={{ cursor: 'pointer' }}
+                >
+                    {showPassword ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
+                </InputGroup.Text>
+            </InputGroup>
+        </div>
+                <div className="d-grid gap-2 mt-3">
+                    <button type='sumbit' className="btn btn-primary">
+                        Login
+                    </button>
+                </div>
+            </div>
         </form>       
     </div>
   )

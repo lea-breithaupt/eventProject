@@ -38,7 +38,7 @@ while (i < 6) {
 
     const newEvent = await newUser.createEvent({
         eventName: `User${i}'s Event`,
-        // eventImg: '',
+        eventImgPath: 'https://assets.editorial.aetnd.com/uploads/2010/01/mardi-gras-gettyimages-175180560.jpg',
         venueName: 'Venue A',
         eventDate: '12/20/22',
         duration: '3 hours',

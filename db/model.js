@@ -65,10 +65,10 @@ Event.init (
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // eventImg: {
-        //     type: DataTypes.BLOB,
-        //     allowNull: false
-        // },
+        eventImgPath: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         venueName: {
             type: DataTypes.STRING(70),
             allowNull: false

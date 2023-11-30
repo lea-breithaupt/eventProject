@@ -10,6 +10,7 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
 
   const [editEvent, setEditEvent] = useState({
     eventName: '',
+    eventImgPath: '',
     venueName: '',
     eventDate: '',
     duration: '',
@@ -174,6 +175,7 @@ return (
             </div>
             ) : (
               <div>
+              <img src={event.eventImgPath} alt="Event" />
               <p>{event.eventName}</p>
               <p>{event.venueName}</p>
               <p>{event.eventDate}</p>

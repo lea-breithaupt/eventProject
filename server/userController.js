@@ -106,9 +106,12 @@ const userFunctions = {
     updateUserZipcode: async (req, res) => {
         const { userId } = req.params;
         const { zipcode } = req.body;
-      
-        try {
-          const user = await User.findByPk(userId);
+        
+        const user = await User.findOne({
+            where: {
+              userId: userId, // Ensure userId is properly set and not undefined
+            },
+          })
       
           if (!user) {
             return res.status(404).json({ message: 'User not found' });
@@ -118,10 +121,6 @@ const userFunctions = {
           await user.save();
       
           return res.status(200).json({ message: 'User zipcode updated successfully' });
-        } catch (error) {
-          console.error('Error updating user zipcode:', error);
-          return res.status(500).json({ message: 'Internal server error' });
-        }
       },
     
     deleteUserProfile: async (req, res) => {

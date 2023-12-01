@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import { Card, Button, Row, Col } from 'react-bootstrap';
 
 const UserEventsByZipcode = () => {
   const [userEvents, setUserEvents] = useState([])
@@ -28,20 +29,28 @@ const UserEventsByZipcode = () => {
   }, [userId])
 
   return (
-    <div>
-      <div>
-        {userEvents.map((event) => (
-          <div key={event.eventId}>
-            <img src={event.eventImgPath} alt="Event" />
-            <p>{event.eventName}</p>
-            <p>{event.venueName}</p>
-            <p>{event.eventDate}</p>
-            <button onClick={() => handleFavoriteEvent(event.eventId)}>Favorite</button>
-            <button>Attend</button>
-          </div>
-        ))}
-      </div>
-    </div>
+    <Row xs={1} md={2} lg={3} className="g-4">
+  {userEvents.map((event) => (
+    <Col key={event.eventId}>
+      <Card>
+        <Card.Img variant="top" src={event.eventImgPath} alt="Event" />
+        <Card.Body>
+          <Card.Title>{event.eventName}</Card.Title>
+          <Card.Text>
+          <label>Venue Name:</label>
+                    <p>{event.venueName}</p>
+                  <label>Date:</label>
+                    <p>{event.eventDate}</p>
+                  <label>Time:</label>
+                    <p>{event.duration}</p>
+                  <label>Zipcode:</label>
+                    <p>{event.zipcode}</p>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  ))}
+</Row>
   )
 }
 

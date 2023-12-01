@@ -131,7 +131,7 @@ const CreateUserEvent = ({ addToEventList, closeEventCreationForm }) => {
                 checked={dogFriendly}
                 onChange={(e) => setDogFriendly(e.target.checked)}
             />
-        <button type='submit'>
+        <button className='Btn' type='submit'>
             Create Event!
         </button>
         </form>

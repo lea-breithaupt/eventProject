@@ -1,7 +1,10 @@
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
+import { NavItem } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
@@ -48,19 +51,19 @@ const Header = () => {
     }
   }, [userId]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (editZipcodeMode) {
-      await axios.put(`/updateUserZipcode/${userId}`, { zipcode: newZipcode });
-      dispatch({
-        type: 'UPDATE_USER_ZIPCODE',
-        payload: newZipcode
-      });
-      setEditZipcodeMode(false);
-    } else {
-      setEditZipcodeMode(true);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (editZipcodeMode) {
+  //     await axios.put(`/updateUserZipcode/${userId}`, { zipcode: newZipcode });
+  //     dispatch({
+  //       type: 'UPDATE_USER_ZIPCODE',
+  //       payload: newZipcode
+  //     });
+  //     setEditZipcodeMode(false);
+  //   } else {
+  //     setEditZipcodeMode(true);
+  //   }
+  // };
   
   const handleEditZipcode = () => {
     setEditZipcodeMode(true)
@@ -73,66 +76,50 @@ const Header = () => {
       })
       console.log('User logged out')
   }
-
+  {`/user-main-page/${userId}`}
   return (
     <div>
       {loggedIn ? (
-       <Navbar>
-          <Container>
-            <Nav>
-              <NavLink to={`/user-main-page/${userId}`}>
-                <button>
-                  Home
-                </button>
-              </NavLink>
-              <p>{userZipcode}</p>
-              <form onSubmit={handleSubmit}>
-                {editZipcodeMode ? (
-                  <div>
-                    <input
-                      type="text"
-                      className="text-white"
-                      placeholder='Search by Zipcode...'
-                      value={newZipcode}
-                      onChange={(e) => setNewZipcode(e.target.value)}
-                    />
-                    <button type="submit">
-                      Set Location
-                    </button>
-                  </div>
-                ) : (
-                  <button onClick={() => setEditZipcodeMode(true)}>
-                    Change Location
-                  </button>
-                )}
-              </form>
-              <NavLink to={`/user-profile/${userId}`}>
-                <button>
-                  Profile
-                </button>
-              </NavLink>
-              <NavLink to='/'>
-                <button onClick={handleLogout}>
-                  Logout
-                </button>
-              </NavLink>
-            </Nav>
-          </Container>
-         </Navbar>
+    <Navbar expand="lg" color="light" className="custom-header" style={{ height: 100 }}>
+    <Container fluid>
+      <Navbar.Brand as={NavLink} to={`/user-main-page/${userId}`} className="me-auto d-flex align-items-center">
+        <img
+          alt=""
+          src="https://drive.google.com/uc?export=view&id=1BF2uE2ou-lWJOT9UlufgebamwQ7wNjnY"
+          className="d-inline-block rounded-circle me-2" style={{ width: 60 }}
+        />
+        CITY LIMITS
+      </Navbar.Brand>
+      <Nav className="justify-content-end">
+        <NavLink to={`/user-profile/${userId}`} className="me-2">
+          <button className="Btn">
+            Profile
+          </button>
+        </NavLink>
+        <NavLink to='/'>
+          <button className="Btn" onClick={handleLogout}>
+            Logout
+          </button>
+        </NavLink>
+      </Nav>
+    </Container>
+  </Navbar>
       ):(
-<Navbar className="bg-body-tertiary">
-<Container>
-  <Navbar.Brand to='/'>
-    <img
-      alt=""
-      src="https://www.canva.com/design/DAF1nTcvHs0/IBiXEHDbcN9Vu8IRBv9beQ/edit?utm_content=DAF1nTcvHs0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
-      width="30"
-      height="30"
-      className="d-inline-block align-top"
-    />{' '}
-    CITY LIMITS
-  </Navbar.Brand>
-</Container>
+<Navbar expand="lg" color="light" fixed="top" className="custom-header">
+  <Container fluid>
+    <Row className="align-items-start">
+      <Col className="d-flex align-items-center">
+      <Navbar.Brand as={NavLink} to={`/`} className="me-auto d-flex align-items-center">
+        <img
+          alt=""
+          src="https://drive.google.com/uc?export=view&id=1BF2uE2ou-lWJOT9UlufgebamwQ7wNjnY"
+          className="d-inline-block rounded-circle me-2" style={{ width: 60 }}
+        />
+        CITY LIMITS
+      </Navbar.Brand>
+      </Col>
+    </Row>
+  </Container>
 </Navbar>
       )}
     </div>

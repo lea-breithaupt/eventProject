@@ -1,9 +1,25 @@
 
 .App {
   background-color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+.custom-header {
+  background-color: #e8e5e5bd;
+  width: 100vw;
 }
 
 .Auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 170px;
+}
+
+.Login-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,10 +55,113 @@ label {
   color: rgb(34, 34, 34);
 }
 
-.Home-page-container {
+.Home-page {
+  background-image: url('https://drive.google.com/uc?export=view&id=1B8s6kVLjdqx3Zittu4oJK78bvwTkRDSn');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  background-color: white;
+  height: 25vh;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home-page-button {
+  background-color: rgb(57, 56, 56);
+  color: white;
+  margin: 5px;
+}
+
+.Btn {
+  background-color: rgb(58, 170, 203);
+  color: black;
+}
+
+.User-profile-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100vw;
-  height: 50vh;
+  height: 100vh;
 }
+
+.User-profile-content-box {
+  width: 600px;
+  height: 530px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+  position: absolute;
+  top: 155px; 
+}
+
+.User-profile-content {
+  padding-left: 12%;
+  padding-right: 12%;
+}
+
+.Delete-account-btn-container {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 200px; 
+  margin-bottom: 20px;
+}
+
+.Delete-btn {
+  background-color: rgb(58, 170, 203);
+  color: black;
+  width: 250px;
+}
+
+.User-profile-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 170px;
+}
+
+.User-profile-form {
+  width: 600px;
+  height: 530px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+  position: absolute;
+  top: 155px; 
+}
+
+.User-main-page {
+  padding: 35px 35px;
+}
+
+.User-event-edit-btn {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.User-event-delete-btn {
+  display: inline-block;
+  margin-right: 10px;
+}
+

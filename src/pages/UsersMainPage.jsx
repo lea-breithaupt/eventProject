@@ -52,7 +52,7 @@ const UsersMainPage = () => {
 }, [])
 
   return (
-    <div>
+    <div className='User-main-page'>
       {loggedIn ? (
         <div>
           <h2>Welcome, {firstname}</h2>
@@ -63,12 +63,14 @@ const UsersMainPage = () => {
                 addToEventList={addToEventList}
                 closeEventCreationForm={closeEventCreationForm}
               />
-              <button onClick={cancelEventCreation}>Cancel</button>
+              <button className='Btn' onClick={cancelEventCreation}>Cancel</button>
             </div>
             ) : (
-              <button onClick={toggleEventCreationForm}>
+              <div className='Create-event-btn-container'>
+              <button className='Btn' onClick={toggleEventCreationForm}>
                 Create New Event
               </button>
+              </div>
             )}
             {showEventSuccessMessage && <p>Event successfully created!</p>}
           </div>

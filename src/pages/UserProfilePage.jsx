@@ -1,3 +1,4 @@
+import UserCreatedEvents from "../components/UserCreatedEvents"
 import UserProfile from "../components/UserProfile"
 import { useParams } from "react-router-dom"
 
@@ -7,6 +8,9 @@ const UserProfilePage = () => {
     <div>
       <div>
         <UserProfile />
+      </div>
+      <div>
+      
       </div>
     </div>
   )

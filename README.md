@@ -37,10 +37,10 @@ The user can create their own account that will be personalized to them. The use
 ### Install Dependencies and Start the Applicatiion
 
 npm install
-npm start
+npm run dev
 # or
 yarn install
-yarn start
+yarn run dev
 
 ## Usage
 

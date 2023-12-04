@@ -24,7 +24,7 @@ The user can create their own account that will be personalized to them. The use
 
 ### Clone the Repository
 
-- git clone 
+- git clone https://github.com/lea-breithaupt/eventProject
 - cd event_project_1
 
 ### Set Up PostgreSQL Database

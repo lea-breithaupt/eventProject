@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { InputGroup, FormControl } from 'react-bootstrap'
@@ -35,11 +35,6 @@ const UserProfile = () => {
         setShowPassword(!showPassword)
     }
 
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target
-    //     setEditUser({ ...editUser, [name]: value })
-    // }
-
     const handleSave = async () => {
         await axios.put(`/updateUserProfile/${userId}`, editUser)
         dispatch({
@@ -72,101 +67,136 @@ const UserProfile = () => {
                 {editUser && editMode && (
                     <div className='User-profile-form-container'>
                         <div className='User-profile-form'>
-                            <div className='User-profile-content'>
+                         <div className='User-profile-content'>
                             <div className='form-group mt-3'>       
-                        <label>First Name:</label>
-                            <input 
-                                // name="firstName" 
-                                value={editUser.firstName} 
-                                onChange={(e) => setEditUser({ ...editUser, firstName: e.target.value })} 
-                            /> 
-                        </div>  
-                        <div className='form-group mt-3'>
-                        <label>Last Name:</label>
-                            <input 
-                                // name="lastName" 
-                                value={editUser.lastName} 
-                                onChange={(e) => setEditUser({ ...editUser, lastName: e.target.value })} 
-                            />
-                        </div>
-                        <div className='form-group mt-3'>
-                        <label>Username:</label>
-                            <input 
-                                // name="username" 
-                                value={editUser.username} 
-                                onChange={(e) => setEditUser({ ...editUser, username: e.target.value })}
-                            /> 
-                        </div>
-                        <div className='form-group mt-3'>
-                        <label>Email:</label>
-                            <input 
-                                // name="email" 
-                                value={editUser.email} 
-                                onChange={(e) => setEditUser({ ...editUser, email: e.target.value })}
-                            />
-                        </div>
-                        <div className='form-group mt-3'> 
-                        <label>Password:</label>
-                        <InputGroup>
-                            <FormControl
-                                type={showPassword ? 'text' : 'password'}
-                                value={editUser.password}
-                                onChange={(e) => setEditUser({ ...editUser, password: e.target.value })}
-                                // name="password"
-                            />
+                             <label>First Name:</label>
+                                <input 
+                                 value={editUser.firstName} 
+                                 onChange={(e) => setEditUser({ 
+                                    ...editUser, 
+                                    firstName: e.target.value 
+                                 })} 
+                                /> 
+                            </div>
 
-                            <InputGroup.Text 
-                                 // className="bg-primary text-white"
-                                 onClick={togglePasswordVisibility} 
-                                style={{ cursor: 'pointer' }}
-                                    >
-                                {showPassword ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
-                            </InputGroup.Text>
-                            </InputGroup>
-                        </div>
-                        <div className='form-group mt-3'>
-                        <label>Zipcode:</label> 
-                            <input 
-                                // name="zipcode" 
-                                value={editUser.zipcode} 
-                                onChange={(e) => setEditUser({ ...editUser, zipcode: e.target.value })}
-                            />
-                        </div>
-                        <div className="d-grid gap-2 mt-3">
-                            <button className='Btn' onClick={handleEdit}>Cancel</button>
-                            <button className='Btn' onClick={handleSave}>Save</button>
-                        </div>
-                        </div>
+                            <div className='form-group mt-3'>
+                             <label>Last Name:</label>
+                                <input 
+                                 value={editUser.lastName} 
+                                 onChange={(e) => setEditUser({
+                                    ...editUser, 
+                                    lastName: e.target.value
+                                 })} 
+                                />
+                            </div>
+
+                            <div className='form-group mt-3'>
+                             <label>Username:</label>
+                                <input 
+                                 value={editUser.username} 
+                                 onChange={(e) => setEditUser({
+                                    ...editUser, 
+                                    username: e.target.value 
+                                 })}
+                                /> 
+                            </div>
+
+                            <div className='form-group mt-3'>
+                             <label>Email:</label>
+                                <input 
+                                 value={editUser.email} 
+                                 onChange={(e) => setEditUser({
+                                    ...editUser, 
+                                    email: e.target.value 
+                                 })}
+                                />
+                            </div>
+
+                            <div className='form-group mt-3'> 
+                             <label>Password:</label>
+                                <InputGroup>
+                                 <FormControl
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={editUser.password}
+                                    onChange={(e) => setEditUser({ 
+                                        ...editUser, 
+                                        password: e.target.value 
+                                    })}
+                                />
+                                <InputGroup.Text 
+                                    onClick={togglePasswordVisibility} 
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {showPassword ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
+                                </InputGroup.Text>
+                                </InputGroup>
+                            </div>
+
+                            <div className='form-group mt-3'>
+                             <label>Zipcode:</label> 
+                                <input 
+                                    value={editUser.zipcode} 
+                                    onChange={(e) => setEditUser({
+                                        ...editUser, 
+                                        zipcode: e.target.value 
+                                    })}
+                                />
+                            </div>
+
+                            <div className="d-grid gap-2 mt-3">
+                                <button 
+                                 className='Btn' 
+                                 onClick={handleEdit}>
+                                    Cancel
+                                </button>
+
+                                <button 
+                                 className='Btn' 
+                                 onClick={handleSave}>
+                                    Save
+                                </button>
+                            </div>
+                         </div>
                         </div>
                     </div>
                 )} 
+
                 {editUser && !editMode && (
                     <div>
-                    <div className='User-profile-container'>
+                     <div className='User-profile-container'>
                         <div className='User-profile-content-box'>
                             <div className='User-profile-content'>
-                            <h3 className='Auth-form-title'>Personal Information:</h3>
-                         <label>First Name:</label>
-                            <p>{editUser.firstName}</p>
-                         <label>Last Name:</label>
-                            <p>{editUser.lastName}</p>
-                         <label>Username: </label>
-                            <p>{editUser.username}</p>
-                         <label>Email: </label>
-                            <p>{editUser.email}</p>
-                         <label>Password:</label> 
-                            <p>{' '}
-                              {showPassword ? editUser.password : '•'.repeat(editUser.password.length)}
-                            </p>
-                         <label>Zipcode:</label>
-                            <p>{editUser.zipcode}</p>
+                             <h3 className='Auth-form-title'>Personal Information:</h3>
+                                <label>First Name:</label>
+                                    <p>{editUser.firstName}</p>
+                                <label>Last Name:</label>
+                                    <p>{editUser.lastName}</p>
+                                <label>Username: </label>
+                                    <p>{editUser.username}</p>
+                                <label>Email: </label>
+                                    <p>{editUser.email}</p>
+                                <label>Password:</label> 
+                                    <p>{' '}
+                                     {showPassword ? editUser.password : '•'.repeat(editUser.password.length)}
+                                    </p>
+                                <label>Zipcode:</label>
+                                    <p>{editUser.zipcode}</p>
 
-                         <button className='Btn' onClick={handleEdit}>Edit</button>
+                                <button 
+                                    className='Btn' 
+                                    onClick={handleEdit}>
+                                        Edit
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div className='Delete-account-btn-container'>
-                        <button className='Delete-btn' onClick={handleDelete}>Delete Account</button>
+                     </div>
+
+                        <div className='Delete-account-btn-container'>
+                            <button 
+                                className='Delete-btn' 
+                                onClick={handleDelete}>
+                                    Delete Account
+                            </button>
                         </div>
                     </div>
                 )}

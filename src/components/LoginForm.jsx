@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -43,8 +43,10 @@ const Login = () => {
                 <h3 className='Auth-form-title'>Sign In</h3>
                 <div className='text-center'>
                     Not registered yet?{" "}
-                    <NavLink to="/create-user-account" className='link-primary'>
-                        Sign Up
+                    <NavLink 
+                     to="/create-user-account" 
+                     className='link-primary'
+                    >Sign Up
                     </NavLink>
                 </div>
                 <div className='form-group mt-3'>
@@ -58,25 +60,24 @@ const Login = () => {
                     />
                 </div>
                 <div className='form-group mt-3'>
-            <label>Password:</label>
-            <InputGroup>
-                <FormControl
-                    className='form-control mt-1'
-                    placeholder='Password'
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required={true}
-                />
-                <InputGroup.Text 
-                    // className="bg-primary text-white"
-                    onClick={togglePasswordVisibility} 
-                    style={{ cursor: 'pointer' }}
-                >
-                    {showPassword ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
-                </InputGroup.Text>
-            </InputGroup>
-        </div>
+                    <label>Password:</label>
+                        <InputGroup>
+                            <FormControl
+                                className='form-control mt-1'
+                                placeholder='Password'
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required={true}
+                            />
+                            <InputGroup.Text 
+                                onClick={togglePasswordVisibility} 
+                                style={{ cursor: 'pointer' }}
+                            >
+                            {showPassword ? <BsFillEyeSlashFill /> : <BsFillEyeFill />}
+                            </InputGroup.Text>
+                        </InputGroup>
+                </div>
                 <div className="d-grid gap-2 mt-3">
                     <button type='sumbit' className="btn btn-primary">
                         Login

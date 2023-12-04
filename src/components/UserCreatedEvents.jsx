@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { set } from 'lodash'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card, Button, Col, Row } from 'react-bootstrap'
 
 const UserCreatedEvents = ({ eventList, setEventList }) => {
   const dispatch = useDispatch()
@@ -31,18 +30,15 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
   }
 
   const handleEditEvent = async (eventId) => {
-      // Dispatch action to set edit mode and eventId
-      dispatch({ 
-        type: 'EDIT_MODE_EVENTID', 
-        payload: eventId 
-      })
-  
-      // Fetch the event details using Axios
-      const response = await axios.get(`/getEventDetails/${eventId}`)
-      const selectedEvent = response.data
-  
-      // Set the retrieved event in edit mode
-      setEditEvent(selectedEvent)
+    dispatch({ 
+      type: 'EDIT_MODE_EVENTID', 
+      payload: eventId 
+    })
+
+    const response = await axios.get(`/getEventDetails/${eventId}`)
+    const selectedEvent = response.data
+
+    setEditEvent(selectedEvent)
   }
 
   const handleSaveEdit = async () => {
@@ -51,6 +47,7 @@ const UserCreatedEvents = ({ eventList, setEventList }) => {
     const response = await axios.get(`/getEventsCreatedByUser/${userId}`)
     setEventList(response.data)
     setEditEvent(response.data)
+    
     dispatch({ 
       type: 'EDIT_MODE_EVENTID', 
       payload: null 
@@ -189,11 +186,21 @@ return (
                   <label>Zipcode:</label>
                     <p>{event.zipcode}</p>
                 </Card.Text>
+
                 <div className='User-event-edit-btn'>
-                <Button className='Btn' onClick={() => handleEditEvent(event.eventId)}>Edit Event</Button>
+                  <Button 
+                    className='Btn' 
+                    onClick={() => handleEditEvent(event.eventId)}>
+                      Edit Event
+                  </Button>
                 </div>
+
                 <div className='User-event-delete-btn'>
-                <Button className='Btn' onClick={() => handleDeleteEvent(event.eventId)}>Delete Event</Button>
+                  <Button 
+                    className='Btn' 
+                    onClick={() => handleDeleteEvent(event.eventId)}>
+                      Delete Event
+                  </Button>
                 </div>
               </Card.Body>
             </Card>

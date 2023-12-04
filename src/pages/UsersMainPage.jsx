@@ -1,15 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from "react-router-dom"
 import axios from 'axios'
 import CreateUserEvent from '../components/CreateUserEvent'
 import UserCreatedEvents from '../components/UserCreatedEvents'
-// import UserUpcomingEvents from '../components/UserUpcomingEvents'
-// import UserFavoritedEvents from '../components/UserFavoritedEvents'
 import EventsByZipcode from '../components/EventsByZipcode'
 
 const UsersMainPage = () => {
-  const { userId } = useParams()
   const loggedIn = useSelector((state) => state.isLoggedIn)
 
   const [eventList, setEventList] = useState([])
@@ -20,7 +16,9 @@ const UsersMainPage = () => {
 
   const addToEventList = (savedEvent) => {
     setEventList([...eventList, savedEvent])
+    
     setShowEventSuccessMessage(true)
+    
     setTimeout(() => {
       setShowEventSuccessMessage(false)
     }, 2000)
@@ -28,12 +26,15 @@ const UsersMainPage = () => {
 
   const toggleEventCreationForm = () => {
     console.log(displayEventCreationForm)
+    
     setDisplayEventCreationForm((prev) => !prev)
+    
     setShowEventSuccessMessage(false)
   }
 
   const cancelEventCreation = () => {
     setDisplayEventCreationForm(false)
+    
     setShowEventSuccessMessage(false)
   }
   
@@ -59,19 +60,27 @@ const UsersMainPage = () => {
           <div>
             {displayEventCreationForm ? (
               <div>
-              <CreateUserEvent
-                addToEventList={addToEventList}
-                closeEventCreationForm={closeEventCreationForm}
-              />
-              <button className='Btn' onClick={cancelEventCreation}>Cancel</button>
-            </div>
+                <CreateUserEvent
+                  addToEventList={addToEventList}
+                  closeEventCreationForm={closeEventCreationForm}
+                />
+
+                <button 
+                  className='Btn' 
+                  onClick={cancelEventCreation}>
+                    Cancel
+                </button>
+              </div>
             ) : (
               <div className='Create-event-btn-container'>
-              <button className='Btn' onClick={toggleEventCreationForm}>
-                Create New Event
-              </button>
+                <button 
+                  className='Btn' 
+                  onClick={toggleEventCreationForm}>
+                    Create New Event
+                </button>
               </div>
             )}
+
             {showEventSuccessMessage && <p>Event successfully created!</p>}
           </div>
 
@@ -83,22 +92,9 @@ const UsersMainPage = () => {
             />
           </div>
 
-          {/* <div>
-            <h2>{firstname}'s Upcoming Events</h2>
-            <UserUpcomingEvents 
-            />
-          </div>
-
-          <div>
-            <h2>{firstname}'s Favorite Events</h2>
-            <UserFavoritedEvents 
-            />
-          </div> */}
-
           <div>
             <h2>Events happening around your city:</h2>
-            <EventsByZipcode
-            />
+            <EventsByZipcode />
           </div>
           
         </div>

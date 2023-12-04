@@ -1,0 +1,17 @@
+# Component Hierarchy
+- App
+    - Header
+    - Router (or AppRouter)
+        - Route (HomePage)
+            - Header
+            - LoginForm
+            - CreateUserAccountPage
+                - UserRegistrationForm
+        - Route (UsersMainPage)
+            - Header
+            - CreateUserEvent
+            - UserCreatedEvents
+            - EventsByZipcode
+        - Route (UserProfilePage)
+            - Header
+            - UserProfile
